@@ -6,6 +6,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { theme } from '../theme';
 import { createEmotionCache } from '../createEmotionCache';
+import { AmplifyProvider } from '../context';
+import '../../styles/globals.css';
 
 import { Amplify } from 'aws-amplify';
 import awsconfig from '../aws-exports';
@@ -25,11 +27,13 @@ export default function MyApp(props: MyAppProps) {
       <Head>
         <meta name='viewport' content='initial-scale=1, width=device-width' />
       </Head>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <AmplifyProvider>
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </AmplifyProvider>
     </CacheProvider>
   );
 }
