@@ -1,10 +1,9 @@
 import * as React from 'react';
 import type { NextPage } from 'next';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import { Container, Typography, Box } from '@mui/material';
 import { useAmplify } from '../context';
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
+import { Navbar } from '../components';
 
 const Home: NextPage = () => {
   const { authState } = useAmplify();
@@ -12,7 +11,8 @@ const Home: NextPage = () => {
     return null;
   }
   return (
-    <Container maxWidth='lg'>
+    <Box>
+      <Navbar />
       <Box
         sx={{
           my: 4,
@@ -25,7 +25,7 @@ const Home: NextPage = () => {
           Hello World!
         </Typography>
       </Box>
-    </Container>
+    </Box>
   );
 };
 

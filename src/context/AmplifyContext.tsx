@@ -31,7 +31,6 @@ export const AmplifyProvider = (props: AmplifyProviderProps) => {
     try {
       const cognitoUser: CognitoUser = await Auth.currentAuthenticatedUser();
       const currentUser: any = await Auth.currentUserInfo;
-      console.log('hi');
       if (cognitoUser && currentUser) {
         setAuthState(AuthState.SignedIn);
         setUser({
