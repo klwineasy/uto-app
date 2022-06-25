@@ -16,9 +16,12 @@
     "@emotion/styled": "latest",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
+    "@mui/x-date-pickers": "^5.0.0-alpha.6",
     "aws-amplify": "^4.3.24",
+    "date": "^2.0.0",
     "next": "latest",
-    "react": "latest",
+    "picker": "^0.1.4",
+    "react": "^17.0.2",
     "react-dom": "latest"
   },
   "devDependencies": {
