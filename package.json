@@ -16,10 +16,11 @@
     "@emotion/styled": "latest",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
-    "aws-amplify": "^4.3.24",
+    "aws-amplify": "^4.3.26",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "use-immer": "^0.7.0"
   },
   "devDependencies": {
     "@types/node": "latest",

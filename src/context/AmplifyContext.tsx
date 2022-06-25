@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import Auth, { CognitoUser } from '@aws-amplify/auth';
-import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
+import { AuthState } from '@aws-amplify/ui-components';
 import { useRouter } from 'next/router';
 
 export interface AmplifyContextProps {

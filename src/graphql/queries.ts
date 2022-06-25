@@ -2,21 +2,540 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getBlog = /* GraphQL */ `
-  query GetBlog($id: ID!) {
-    getBlog(id: $id) {
+export const getOrder = /* GraphQL */ `
+  query GetOrder($id: ID!) {
+    getOrder(id: $id) {
+      id
+      receiptID
+      receipt {
+        id
+        status
+        date
+        customerID
+        orders {
+          nextToken
+          startedAt
+        }
+        customer {
+          id
+          name
+          phoneNumber
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        subTotal
+        discount
+        total
+        credit
+        creditDue
+        salesRep {
+          id
+          name
+          startDate
+          phoneNumber
+          email
+          jobTitle
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      productID
+      product {
+        id
+        code
+        description
+        inventories {
+          nextToken
+          startedAt
+        }
+        unit
+        packing
+        salePrice
+        orders {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      quantity
+      inventoryID
+      inventory {
+        id
+        productID
+        locationID
+        product {
+          id
+          code
+          description
+          unit
+          packing
+          salePrice
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        location {
+          id
+          name
+          wareHouseID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        quantity
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      pricePerUnit
+      totalPrice
+      date
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listOrders = /* GraphQL */ `
+  query ListOrders(
+    $filter: ModelOrderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        receiptID
+        receipt {
+          id
+          status
+          date
+          customerID
+          subTotal
+          discount
+          total
+          credit
+          creditDue
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        productID
+        product {
+          id
+          code
+          description
+          unit
+          packing
+          salePrice
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        quantity
+        inventoryID
+        inventory {
+          id
+          productID
+          locationID
+          quantity
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        pricePerUnit
+        totalPrice
+        date
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncOrders = /* GraphQL */ `
+  query SyncOrders(
+    $filter: ModelOrderFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncOrders(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        receiptID
+        receipt {
+          id
+          status
+          date
+          customerID
+          subTotal
+          discount
+          total
+          credit
+          creditDue
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        productID
+        product {
+          id
+          code
+          description
+          unit
+          packing
+          salePrice
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        quantity
+        inventoryID
+        inventory {
+          id
+          productID
+          locationID
+          quantity
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        pricePerUnit
+        totalPrice
+        date
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getReceipt = /* GraphQL */ `
+  query GetReceipt($id: ID!) {
+    getReceipt(id: $id) {
+      id
+      status
+      date
+      customerID
+      orders {
+        items {
+          id
+          receiptID
+          productID
+          quantity
+          inventoryID
+          pricePerUnit
+          totalPrice
+          date
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      customer {
+        id
+        name
+        phoneNumber
+        receipts {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      subTotal
+      discount
+      total
+      credit
+      creditDue
+      salesRep {
+        id
+        name
+        startDate
+        phoneNumber
+        email
+        jobTitle
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listReceipts = /* GraphQL */ `
+  query ListReceipts(
+    $filter: ModelReceiptFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listReceipts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        status
+        date
+        customerID
+        orders {
+          nextToken
+          startedAt
+        }
+        customer {
+          id
+          name
+          phoneNumber
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        subTotal
+        discount
+        total
+        credit
+        creditDue
+        salesRep {
+          id
+          name
+          startDate
+          phoneNumber
+          email
+          jobTitle
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncReceipts = /* GraphQL */ `
+  query SyncReceipts(
+    $filter: ModelReceiptFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncReceipts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        status
+        date
+        customerID
+        orders {
+          nextToken
+          startedAt
+        }
+        customer {
+          id
+          name
+          phoneNumber
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        subTotal
+        discount
+        total
+        credit
+        creditDue
+        salesRep {
+          id
+          name
+          startDate
+          phoneNumber
+          email
+          jobTitle
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getEmployee = /* GraphQL */ `
+  query GetEmployee($id: ID!) {
+    getEmployee(id: $id) {
       id
       name
-      posts {
+      startDate
+      phoneNumber
+      email
+      jobTitle
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listEmployees = /* GraphQL */ `
+  query ListEmployees(
+    $filter: ModelEmployeeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listEmployees(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        startDate
+        phoneNumber
+        email
+        jobTitle
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncEmployees = /* GraphQL */ `
+  query SyncEmployees(
+    $filter: ModelEmployeeFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncEmployees(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        startDate
+        phoneNumber
+        email
+        jobTitle
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getCustomer = /* GraphQL */ `
+  query GetCustomer($id: ID!) {
+    getCustomer(id: $id) {
+      id
+      name
+      phoneNumber
+      receipts {
         items {
           id
-          title
+          status
+          date
+          customerID
+          subTotal
+          discount
+          total
+          credit
+          creditDue
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          blogPostsId
         }
         nextToken
         startedAt
@@ -29,17 +548,18 @@ export const getBlog = /* GraphQL */ `
     }
   }
 `;
-export const listBlogs = /* GraphQL */ `
-  query ListBlogs(
-    $filter: ModelBlogFilterInput
+export const listCustomers = /* GraphQL */ `
+  query ListCustomers(
+    $filter: ModelCustomerFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listBlogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listCustomers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         name
-        posts {
+        phoneNumber
+        receipts {
           nextToken
           startedAt
         }
@@ -54,14 +574,14 @@ export const listBlogs = /* GraphQL */ `
     }
   }
 `;
-export const syncBlogs = /* GraphQL */ `
-  query SyncBlogs(
-    $filter: ModelBlogFilterInput
+export const syncCustomers = /* GraphQL */ `
+  query SyncCustomers(
+    $filter: ModelCustomerFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncBlogs(
+    syncCustomers(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -70,7 +590,8 @@ export const syncBlogs = /* GraphQL */ `
       items {
         id
         name
-        posts {
+        phoneNumber
+        receipts {
           nextToken
           startedAt
         }
@@ -85,34 +606,45 @@ export const syncBlogs = /* GraphQL */ `
     }
   }
 `;
-export const getPost = /* GraphQL */ `
-  query GetPost($id: ID!) {
-    getPost(id: $id) {
+export const getProduct = /* GraphQL */ `
+  query GetProduct($id: ID!) {
+    getProduct(id: $id) {
       id
-      title
-      blog {
-        id
-        name
-        posts {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      comments {
+      code
+      description
+      inventories {
         items {
           id
-          content
+          productID
+          locationID
+          quantity
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
-          postCommentsId
+        }
+        nextToken
+        startedAt
+      }
+      unit
+      packing
+      salePrice
+      orders {
+        items {
+          id
+          receiptID
+          productID
+          quantity
+          inventoryID
+          pricePerUnit
+          totalPrice
+          date
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
         nextToken
         startedAt
@@ -122,30 +654,28 @@ export const getPost = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      blogPostsId
     }
   }
 `;
-export const listPosts = /* GraphQL */ `
-  query ListPosts(
-    $filter: ModelPostFilterInput
+export const listProducts = /* GraphQL */ `
+  query ListProducts(
+    $filter: ModelProductFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
+        code
+        description
+        inventories {
+          nextToken
+          startedAt
         }
-        comments {
+        unit
+        packing
+        salePrice
+        orders {
           nextToken
           startedAt
         }
@@ -154,21 +684,20 @@ export const listPosts = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        blogPostsId
       }
       nextToken
       startedAt
     }
   }
 `;
-export const syncPosts = /* GraphQL */ `
-  query SyncPosts(
-    $filter: ModelPostFilterInput
+export const syncProducts = /* GraphQL */ `
+  query SyncProducts(
+    $filter: ModelProductFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncPosts(
+    syncProducts(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -176,17 +705,16 @@ export const syncPosts = /* GraphQL */ `
     ) {
       items {
         id
-        title
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
+        code
+        description
+        inventories {
+          nextToken
+          startedAt
         }
-        comments {
+        unit
+        packing
+        salePrice
+        orders {
           nextToken
           startedAt
         }
@@ -195,90 +723,74 @@ export const syncPosts = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-        blogPostsId
       }
       nextToken
       startedAt
     }
   }
 `;
-export const getComment = /* GraphQL */ `
-  query GetComment($id: ID!) {
-    getComment(id: $id) {
+export const getWareHouse = /* GraphQL */ `
+  query GetWareHouse($id: ID!) {
+    getWareHouse(id: $id) {
       id
-      post {
-        id
-        title
-        blog {
+      name
+      address
+      locations {
+        items {
           id
           name
+          wareHouseID
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
         }
-        comments {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        blogPostsId
+        nextToken
+        startedAt
       }
-      content
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      postCommentsId
     }
   }
 `;
-export const listComments = /* GraphQL */ `
-  query ListComments(
-    $filter: ModelCommentFilterInput
+export const listWareHouses = /* GraphQL */ `
+  query ListWareHouses(
+    $filter: ModelWareHouseFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listWareHouses(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        post {
-          id
-          title
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          blogPostsId
+        name
+        address
+        locations {
+          nextToken
+          startedAt
         }
-        content
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        postCommentsId
       }
       nextToken
       startedAt
     }
   }
 `;
-export const syncComments = /* GraphQL */ `
-  query SyncComments(
-    $filter: ModelCommentFilterInput
+export const syncWareHouses = /* GraphQL */ `
+  query SyncWareHouses(
+    $filter: ModelWareHouseFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncComments(
+    syncWareHouses(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -286,23 +798,296 @@ export const syncComments = /* GraphQL */ `
     ) {
       items {
         id
-        post {
-          id
-          title
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          blogPostsId
+        name
+        address
+        locations {
+          nextToken
+          startedAt
         }
-        content
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        postCommentsId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getLocation = /* GraphQL */ `
+  query GetLocation($id: ID!) {
+    getLocation(id: $id) {
+      id
+      name
+      wareHouseID
+      wareHouse {
+        id
+        name
+        address
+        locations {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      inventories {
+        items {
+          id
+          productID
+          locationID
+          quantity
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listLocations = /* GraphQL */ `
+  query ListLocations(
+    $filter: ModelLocationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLocations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        wareHouseID
+        wareHouse {
+          id
+          name
+          address
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        inventories {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncLocations = /* GraphQL */ `
+  query SyncLocations(
+    $filter: ModelLocationFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncLocations(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        wareHouseID
+        wareHouse {
+          id
+          name
+          address
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        inventories {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getInventory = /* GraphQL */ `
+  query GetInventory($id: ID!) {
+    getInventory(id: $id) {
+      id
+      productID
+      locationID
+      product {
+        id
+        code
+        description
+        inventories {
+          nextToken
+          startedAt
+        }
+        unit
+        packing
+        salePrice
+        orders {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      location {
+        id
+        name
+        wareHouseID
+        wareHouse {
+          id
+          name
+          address
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        inventories {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      quantity
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listInventories = /* GraphQL */ `
+  query ListInventories(
+    $filter: ModelInventoryFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listInventories(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        productID
+        locationID
+        product {
+          id
+          code
+          description
+          unit
+          packing
+          salePrice
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        location {
+          id
+          name
+          wareHouseID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        quantity
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncInventories = /* GraphQL */ `
+  query SyncInventories(
+    $filter: ModelInventoryFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncInventories(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        productID
+        locationID
+        product {
+          id
+          code
+          description
+          unit
+          packing
+          salePrice
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        location {
+          id
+          name
+          wareHouseID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        quantity
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
       startedAt
