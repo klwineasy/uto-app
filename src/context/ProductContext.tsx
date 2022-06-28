@@ -6,8 +6,9 @@ import { EntityState, EntityResult } from '.';
 
 export interface ProductContextProps {
   products: EntityResult<Product[]>;
+  getProduct: (productCode: string) => Promise<Product[] | undefined>;
   createProduct: (product: Product) => Promise<void>;
-  deleteProduct: (productID: string) => Promise<void>;
+  deleteProduct: (product: Product) => Promise<void>;
 }
 
 export interface ProductProviderProps {
@@ -57,18 +58,29 @@ export const ProductProvider = (props: ProductProviderProps) => {
     }
   };
 
-  const createProduct = async (product: Product) => {
+  const getProduct = async (productCode: string) => {
     try {
-      const result = await DataStore.save(new Product(product));
+      const product = await DataStore.query(Product, (o) =>
+        o.code('eq', productCode)
+      );
+      return product;
     } catch (err: any) {
       console.error(err.message);
     }
   };
 
-  const deleteProduct = async (productID: string) => {
+  const createProduct = async (product: Product) => {
     try {
-      const productToDelete = await DataStore.query(Product, productID);
-      productToDelete && (await DataStore.delete(productToDelete));
+      const result = await DataStore.save(new Product(product));
+      console.log(result);
+    } catch (err: any) {
+      console.error(err.message);
+    }
+  };
+
+  const deleteProduct = async (product: Product) => {
+    try {
+      await DataStore.delete(product);
     } catch (err: any) {
       console.error(err.message);
     }
@@ -76,6 +88,7 @@ export const ProductProvider = (props: ProductProviderProps) => {
 
   const context: ProductContextProps = {
     products,
+    getProduct,
     createProduct,
     deleteProduct,
   };
