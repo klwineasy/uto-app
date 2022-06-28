@@ -63,6 +63,8 @@ export declare class Receipt {
   readonly total: number;
   readonly credit: boolean;
   readonly creditDue: number;
+  readonly salesRepID: string;
+  readonly salesRep: Employee;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Receipt, ReceiptMetaData>);

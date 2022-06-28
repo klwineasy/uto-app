@@ -7,6 +7,7 @@ import { EntityState, EntityResult } from '.';
 export interface ProductContextProps {
   products: EntityResult<Product[]>;
   createProduct: (product: Product) => Promise<void>;
+  deleteProduct: (productID: string) => Promise<void>;
 }
 
 export interface ProductProviderProps {
@@ -58,9 +59,16 @@ export const ProductProvider = (props: ProductProviderProps) => {
 
   const createProduct = async (product: Product) => {
     try {
-      //const result = await DataStore.save(new Product(product));
-      //console.log(result);
-      console.log(product);
+      const result = await DataStore.save(new Product(product));
+    } catch (err: any) {
+      console.error(err.message);
+    }
+  };
+
+  const deleteProduct = async (productID: string) => {
+    try {
+      const productToDelete = await DataStore.query(Product, productID);
+      productToDelete && (await DataStore.delete(productToDelete));
     } catch (err: any) {
       console.error(err.message);
     }
@@ -69,6 +77,7 @@ export const ProductProvider = (props: ProductProviderProps) => {
   const context: ProductContextProps = {
     products,
     createProduct,
+    deleteProduct,
   };
 
   return (

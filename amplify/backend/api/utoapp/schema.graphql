@@ -29,7 +29,8 @@ type Receipt @model {
   total: Float!
   credit: Boolean!
   creditDue: Int!
-  salesRep: Employee!
+  salesRepID: ID!
+  salesRep: Employee! @hasOne(fields: ["salesRepID"])
 }
 
 type Employee @model {

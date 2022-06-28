@@ -215,6 +215,27 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "salesRepID": {
+                    "name": "salesRepID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "salesRep": {
+                    "name": "salesRep",
+                    "isArray": false,
+                    "type": {
+                        "model": "Employee"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": "id",
+                        "targetName": "salesRepID"
+                    }
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -717,5 +738,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "45ee4aa7c9218358056d90ce8a17ffab"
+    "version": "e11122423f112de7205673b9088c6d46"
 };

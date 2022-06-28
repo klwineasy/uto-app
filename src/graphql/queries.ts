@@ -31,6 +31,7 @@ export const getOrder = /* GraphQL */ `
         total
         credit
         creditDue
+        salesRepID
         salesRep {
           id
           name
@@ -139,6 +140,7 @@ export const listOrders = /* GraphQL */ `
           total
           credit
           creditDue
+          salesRepID
           createdAt
           updatedAt
           _version
@@ -212,6 +214,7 @@ export const syncOrders = /* GraphQL */ `
           total
           credit
           creditDue
+          salesRepID
           createdAt
           updatedAt
           _version
@@ -304,6 +307,7 @@ export const getReceipt = /* GraphQL */ `
       total
       credit
       creditDue
+      salesRepID
       salesRep {
         id
         name
@@ -356,6 +360,7 @@ export const listReceipts = /* GraphQL */ `
         total
         credit
         creditDue
+        salesRepID
         salesRep {
           id
           name
@@ -417,6 +422,7 @@ export const syncReceipts = /* GraphQL */ `
         total
         credit
         creditDue
+        salesRepID
         salesRep {
           id
           name
@@ -531,6 +537,7 @@ export const getCustomer = /* GraphQL */ `
           total
           credit
           creditDue
+          salesRepID
           createdAt
           updatedAt
           _version

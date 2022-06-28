@@ -140,6 +140,7 @@ export type Receipt = {
   total: number,
   credit: boolean,
   creditDue: number,
+  salesRepID: string,
   salesRep: Employee,
   createdAt: string,
   updatedAt: string,
@@ -290,6 +291,7 @@ export type CreateReceiptInput = {
   total: number,
   credit: boolean,
   creditDue: number,
+  salesRepID: string,
   _version?: number | null,
 };
 
@@ -302,6 +304,7 @@ export type ModelReceiptConditionInput = {
   total?: ModelFloatInput | null,
   credit?: ModelBooleanInput | null,
   creditDue?: ModelIntInput | null,
+  salesRepID?: ModelIDInput | null,
   and?: Array< ModelReceiptConditionInput | null > | null,
   or?: Array< ModelReceiptConditionInput | null > | null,
   not?: ModelReceiptConditionInput | null,
@@ -324,6 +327,7 @@ export type UpdateReceiptInput = {
   total?: number | null,
   credit?: boolean | null,
   creditDue?: number | null,
+  salesRepID?: string | null,
   _version?: number | null,
 };
 
@@ -539,6 +543,7 @@ export type ModelReceiptFilterInput = {
   total?: ModelFloatInput | null,
   credit?: ModelBooleanInput | null,
   creditDue?: ModelIntInput | null,
+  salesRepID?: ModelIDInput | null,
   and?: Array< ModelReceiptFilterInput | null > | null,
   or?: Array< ModelReceiptFilterInput | null > | null,
   not?: ModelReceiptFilterInput | null,
@@ -670,6 +675,7 @@ export type CreateOrderMutation = {
       total: number,
       credit: boolean,
       creditDue: number,
+      salesRepID: string,
       salesRep:  {
         __typename: "Employee",
         id: string,
@@ -802,6 +808,7 @@ export type UpdateOrderMutation = {
       total: number,
       credit: boolean,
       creditDue: number,
+      salesRepID: string,
       salesRep:  {
         __typename: "Employee",
         id: string,
@@ -934,6 +941,7 @@ export type DeleteOrderMutation = {
       total: number,
       credit: boolean,
       creditDue: number,
+      salesRepID: string,
       salesRep:  {
         __typename: "Employee",
         id: string,
@@ -1083,6 +1091,7 @@ export type CreateReceiptMutation = {
     total: number,
     credit: boolean,
     creditDue: number,
+    salesRepID: string,
     salesRep:  {
       __typename: "Employee",
       id: string,
@@ -1159,6 +1168,7 @@ export type UpdateReceiptMutation = {
     total: number,
     credit: boolean,
     creditDue: number,
+    salesRepID: string,
     salesRep:  {
       __typename: "Employee",
       id: string,
@@ -1235,6 +1245,7 @@ export type DeleteReceiptMutation = {
     total: number,
     credit: boolean,
     creditDue: number,
+    salesRepID: string,
     salesRep:  {
       __typename: "Employee",
       id: string,
@@ -1347,6 +1358,7 @@ export type CreateCustomerMutation = {
         total: number,
         credit: boolean,
         creditDue: number,
+        salesRepID: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -1388,6 +1400,7 @@ export type UpdateCustomerMutation = {
         total: number,
         credit: boolean,
         creditDue: number,
+        salesRepID: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -1429,6 +1442,7 @@ export type DeleteCustomerMutation = {
         total: number,
         credit: boolean,
         creditDue: number,
+        salesRepID: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -2136,6 +2150,7 @@ export type GetOrderQuery = {
       total: number,
       credit: boolean,
       creditDue: number,
+      salesRepID: string,
       salesRep:  {
         __typename: "Employee",
         id: string,
@@ -2255,6 +2270,7 @@ export type ListOrdersQuery = {
         total: number,
         credit: boolean,
         creditDue: number,
+        salesRepID: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -2329,6 +2345,7 @@ export type SyncOrdersQuery = {
         total: number,
         credit: boolean,
         creditDue: number,
+        salesRepID: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -2431,6 +2448,7 @@ export type GetReceiptQuery = {
     total: number,
     credit: boolean,
     creditDue: number,
+    salesRepID: string,
     salesRep:  {
       __typename: "Employee",
       id: string,
@@ -2489,6 +2507,7 @@ export type ListReceiptsQuery = {
       total: number,
       credit: boolean,
       creditDue: number,
+      salesRepID: string,
       salesRep:  {
         __typename: "Employee",
         id: string,
@@ -2551,6 +2570,7 @@ export type SyncReceiptsQuery = {
       total: number,
       credit: boolean,
       creditDue: number,
+      salesRepID: string,
       salesRep:  {
         __typename: "Employee",
         id: string,
@@ -2677,6 +2697,7 @@ export type GetCustomerQuery = {
         total: number,
         credit: boolean,
         creditDue: number,
+        salesRepID: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -3325,6 +3346,7 @@ export type OnCreateOrderSubscription = {
       total: number,
       credit: boolean,
       creditDue: number,
+      salesRepID: string,
       salesRep:  {
         __typename: "Employee",
         id: string,
@@ -3452,6 +3474,7 @@ export type OnUpdateOrderSubscription = {
       total: number,
       credit: boolean,
       creditDue: number,
+      salesRepID: string,
       salesRep:  {
         __typename: "Employee",
         id: string,
@@ -3579,6 +3602,7 @@ export type OnDeleteOrderSubscription = {
       total: number,
       credit: boolean,
       creditDue: number,
+      salesRepID: string,
       salesRep:  {
         __typename: "Employee",
         id: string,
@@ -3723,6 +3747,7 @@ export type OnCreateReceiptSubscription = {
     total: number,
     credit: boolean,
     creditDue: number,
+    salesRepID: string,
     salesRep:  {
       __typename: "Employee",
       id: string,
@@ -3794,6 +3819,7 @@ export type OnUpdateReceiptSubscription = {
     total: number,
     credit: boolean,
     creditDue: number,
+    salesRepID: string,
     salesRep:  {
       __typename: "Employee",
       id: string,
@@ -3865,6 +3891,7 @@ export type OnDeleteReceiptSubscription = {
     total: number,
     credit: boolean,
     creditDue: number,
+    salesRepID: string,
     salesRep:  {
       __typename: "Employee",
       id: string,
@@ -3957,6 +3984,7 @@ export type OnCreateCustomerSubscription = {
         total: number,
         credit: boolean,
         creditDue: number,
+        salesRepID: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -3993,6 +4021,7 @@ export type OnUpdateCustomerSubscription = {
         total: number,
         credit: boolean,
         creditDue: number,
+        salesRepID: string,
         createdAt: string,
         updatedAt: string,
         _version: number,
@@ -4029,6 +4058,7 @@ export type OnDeleteCustomerSubscription = {
         total: number,
         credit: boolean,
         creditDue: number,
+        salesRepID: string,
         createdAt: string,
         updatedAt: string,
         _version: number,

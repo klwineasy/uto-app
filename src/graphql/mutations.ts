@@ -34,6 +34,7 @@ export const createOrder = /* GraphQL */ `
         total
         credit
         creditDue
+        salesRepID
         salesRep {
           id
           name
@@ -154,6 +155,7 @@ export const updateOrder = /* GraphQL */ `
         total
         credit
         creditDue
+        salesRepID
         salesRep {
           id
           name
@@ -274,6 +276,7 @@ export const deleteOrder = /* GraphQL */ `
         total
         credit
         creditDue
+        salesRepID
         salesRep {
           id
           name
@@ -410,6 +413,7 @@ export const createReceipt = /* GraphQL */ `
       total
       credit
       creditDue
+      salesRepID
       salesRep {
         id
         name
@@ -479,6 +483,7 @@ export const updateReceipt = /* GraphQL */ `
       total
       credit
       creditDue
+      salesRepID
       salesRep {
         id
         name
@@ -548,6 +553,7 @@ export const deleteReceipt = /* GraphQL */ `
       total
       credit
       creditDue
+      salesRepID
       salesRep {
         id
         name
@@ -649,6 +655,7 @@ export const createCustomer = /* GraphQL */ `
           total
           credit
           creditDue
+          salesRepID
           createdAt
           updatedAt
           _version
@@ -686,6 +693,7 @@ export const updateCustomer = /* GraphQL */ `
           total
           credit
           creditDue
+          salesRepID
           createdAt
           updatedAt
           _version
@@ -723,6 +731,7 @@ export const deleteCustomer = /* GraphQL */ `
           total
           credit
           creditDue
+          salesRepID
           createdAt
           updatedAt
           _version
