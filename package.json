@@ -20,6 +20,8 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-hook-form": "^7.33.0",
+    "react-hook-form-mui": "^3.9.0",
     "use-immer": "^0.7.0"
   },
   "devDependencies": {
