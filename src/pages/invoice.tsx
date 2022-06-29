@@ -43,51 +43,91 @@ function createData(
   Qty: number,
   Packing: string,
   Price: number,
+  WholeSale: number,
   TotalPrice: number
 ) {
-  return { Sr, Code, Description, Qty, Packing, Price, TotalPrice };
+  return {
+    Sr,
+    Code,
+    Description,
+    Qty,
+    Packing,
+    Price,
+    WholeSale,
+    TotalPrice,
+  };
 }
 
-const rows = [
-  createData(1, 'F-001', 'Frozen yoghurt', 159, 'Pcs', 24, 5),
-  createData(2, 'I-001', 'Ice cream sandwich', 237, 'Pcs', 37, 4.3),
-  createData(3, 'E-001', 'Eclair', 262, 'Pcs', 24, 6.0),
-  createData(4, 'C-001', 'Cupcake', 305, 'Pcs', 67, 4.3),
-  createData(5, 'G-001', 'Gingerbread', 356, 'Pcs', 49, 3.9),
+//Total Price
+// function priceRow(qty: number, price: number) {
+//   return qty * price;
+// }
+
+const items = [
+  createData(1, 'F-001', '3 way stopcock (H2)', '', 'Pcs', '500', '', ''),
+  createData(2, 'I-001', 'Aneroid (Child) H2', '', 'Pcs', '200', '', ''),
+  createData(
+    3,
+    'E-001',
+    "Alcohol Pad 100's (Advacare)",
+    '',
+    'Pcs',
+    '300',
+    '',
+    ''
+  ),
+  createData(
+    4,
+    'C-001',
+    'Digital Blood Pressure Monitor (Arm Type) H2',
+    '',
+    'Pcs',
+    '200',
+    '',
+    ''
+  ),
+  createData(
+    5,
+    'G-001',
+    'Catheter Malecot No.16 (Surgicare)',
+    '',
+    'Pcs',
+    '100',
+    '',
+    ''
+  ),
 ];
 
 const Invoice: NextPage = () => {
   return (
-    <div className='container' style={{ margin: 5, padding: 5 }}>
+    <div className='myStyle'>
       <Typography>
         <h2>New Invoice</h2>
       </Typography>
-      <div className='row' style={{ margin: 5, padding: 5 }}>
+      <div style={{ marginRight: 3, padding: 5 }}>
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <Autocomplete
               disablePortal
               id='combo-box-demo'
               options={top100Films}
-              sx={{ width: 300 }}
+              sx={{ width: 600 }}
               renderInput={(params) => (
                 <TextField {...params} label='Customer Name' />
               )}
             />
           </Grid>
           <Grid item xs={6}>
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <Item sx={{ width: 150, border: 1 }}>Invoice No:10000</Item>
-              </Grid>
-              <Grid item xs={6}>
-                <input type='submit' value='Submit' />
-              </Grid>
+            <Grid sx={{ width: 300, margin: 'right', padding: 1 }}>
+              <Item>Invoice No:10000</Item>
+            </Grid>
+            <Grid sx={{ width: 200, margin: 'right', padding: 1 }}>
+              <Item>Date</Item>
             </Grid>
           </Grid>
         </Grid>
       </div>
-      <div className='row' style={{ margin: 5, padding: 5 }}>
+      <div style={{ margin: 5, padding: 3 }}>
         <TableContainer component={Paper}>
           <Table aria-label='simple table'>
             <TableHead style={{ fontStyle: 'bold' }}>
@@ -102,22 +142,27 @@ const Invoice: NextPage = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {items.map((row) => (
                 <TableRow
-                  key={row.name}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                   <TableCell>{row.Sr}</TableCell>
                   <TableCell component='th' scope='row'>
                     {row.Code}
                   </TableCell>
                   <TableCell component='th' scope='row'>
-                    <Autocomplete
-                      options={top100Films}
-                      renderInput={(params) => <TextField {...params} />}
-                    />
+                    <Stack>
+                      <Autocomplete
+                        options={descriptions}
+                        sx={{ width: 200 }}
+                        renderInput={(params) => <TextField {...params} />}
+                      />
+                    </Stack>
                   </TableCell>
                   <TableCell align='right'>
-                    <TextField />
+                    <input
+                      type='text'
+                      style={{ border: 0, textAlign: 'right' }}
+                    />
                   </TableCell>
                   <TableCell align='right'>{row.Packing}</TableCell>
                   <TableCell align='right'>{row.Price}</TableCell>
@@ -182,10 +227,18 @@ const Invoice: NextPage = () => {
           </Grid>
         </Grid>
       </div>
-      <h1 align='center'>Thank You For Your Bussiness!</h1>
+      <h1 align='center'>Thank You For Your Business!</h1>
     </div>
   );
 };
+
+//Description;
+const descriptions = [
+  { label: 'Apple Juice' },
+  { label: 'Hot Espresso' },
+  { label: 'Chocolate Cake' },
+  { label: 'Cheese Cake' },
+];
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 const top100Films = [
   { label: 'The Shawshank Redemption', year: 1994 },

@@ -3,3 +3,11 @@
 .amplify-button[data-variation='primary'] {
   background: #ec7211;
 }
+
+.myStyle {
+  color: white;
+  background-color: DodgerBlue;
+  padding: 10px;
+  font-family: Arial;
+  width: 100%;
+}

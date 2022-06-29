@@ -10,7 +10,11 @@ import {
   Paper,
   Autocomplete,
   TextField,
+  Stack,
 } from '@mui/material';
+//import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { NoEncryption } from '@mui/icons-material';
 
 const discount = 0.05;
@@ -19,7 +23,7 @@ function ccyFormat(num: number) {
   return `${num.toFixed(2)}`;
 }
 
-function priceRow(qty: number, price: number, wholeSale: number) {
+function priceRow(qty: number, price: number) {
   return qty * price;
 }
 
@@ -29,8 +33,9 @@ function createRow(
   price: number,
   wholeSale: number
 ) {
-  const totalPrice = priceRow(qty, price, wholeSale);
+  const totalPrice = priceRow(qty, price);
   return { desc, qty, price, wholeSale, totalPrice };
+  console.log(totalPrice);
 }
 
 interface Row {
@@ -58,8 +63,18 @@ const invoiceDiscount = discount * invoiceSubtotal;
 const invoiceTotal = invoiceSubtotal - invoiceDiscount;
 
 const Invoices: NextPage = () => {
+  //const [value, setValue] = React.useState<Date | null>(new Date());
+  const defaultProps = {
+    options: top100Films,
+    getOptionLabel: (option: FilmOptionType) => option.title,
+  };
+  const flatProps = {
+    options: top100Films.map((option) => option.title),
+  };
+  const [value, setValue] = React.useState<FilmOptionType | null>(null);
+
   return (
-    <div style={{ width: '100%', padding: 3, margin: 3 }}>
+    <div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label='spanning table'>
           <TableHead>
@@ -76,7 +91,23 @@ const Invoices: NextPage = () => {
                 />
               </TableCell>
               <TableCell align='right'>
-                <h5>Date</h5>
+                <h5>
+                  {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <Stack spacing={3}>
+                      <DatePicker
+                        views={['day']}
+                        label='Just date'
+                        value={value}
+                        onChange={(newValue) => {
+                          setValue(newValue);
+                        }}
+                        renderInput={(params) => (
+                          <TextField {...params} helperText={null} />
+                        )}
+                      />
+                    </Stack>
+                  </LocalizationProvider> */}
+                </h5>
                 <h5>Invoice</h5>
               </TableCell>
             </TableRow>
@@ -92,7 +123,15 @@ const Invoices: NextPage = () => {
             {rows.map((row) => (
               <TableRow key={row.desc}>
                 <TableCell>
-                  <input type='text' />
+                  <Stack>
+                    <Autocomplete
+                      {...defaultProps}
+                      id='disable-close-on-select'
+                      renderInput={(params) => (
+                        <TextField {...params} variant='standard' />
+                      )}
+                    />
+                  </Stack>
                 </TableCell>
                 <TableCell align='right'>
                   <input
@@ -138,6 +177,20 @@ const customerName = [
   { label: 'YGN- Aung Brother' },
   { label: 'MDY- Thit Sar' },
 ];
+
+const top100Films = [
+  { title: 'The Shawshank Redemption', year: 1994 },
+  { title: 'The Godfather', year: 1972 },
+  { title: 'The Godfather: Part II', year: 1974 },
+  { title: 'The Dark Knight', year: 2008 },
+  { title: '12 Angry Men', year: 1957 },
+  { title: "Schindler's List", year: 1993 },
+];
+
+interface FilmOptionType {
+  title: string;
+  year: number;
+}
 
 export default Invoices;
 //
