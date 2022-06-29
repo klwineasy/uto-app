@@ -67,6 +67,8 @@ type WareHouse @model {
   address: String!
   locations: [Location]
     @hasMany(indexName: "warehouseByLocation", fields: ["id"])
+  inventories: [Inventory]
+    @hasMany(indexName: "inventoryByWareHouse", fields: ["id"])
 }
 
 type Location @model {
@@ -81,8 +83,10 @@ type Location @model {
 type Inventory @model {
   id: ID!
   productID: ID! @index(name: "inventoryByProduct")
+  wareHouseID: ID! @index(name: "inventoryByWareHouse")
   locationID: ID! @index(name: "inventoryByLocation")
   product: Product @belongsTo(fields: ["productID"])
+  warehouse: WareHouse @belongsTo(fields: ["wareHouseID"])
   location: Location @belongsTo(fields: ["locationID"])
   quantity: Int!
 }

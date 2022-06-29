@@ -81,6 +81,7 @@ export const createOrder = /* GraphQL */ `
       inventory {
         id
         productID
+        wareHouseID
         locationID
         product {
           id
@@ -89,6 +90,16 @@ export const createOrder = /* GraphQL */ `
           unit
           packing
           salePrice
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        warehouse {
+          id
+          name
+          address
           createdAt
           updatedAt
           _version
@@ -202,6 +213,7 @@ export const updateOrder = /* GraphQL */ `
       inventory {
         id
         productID
+        wareHouseID
         locationID
         product {
           id
@@ -210,6 +222,16 @@ export const updateOrder = /* GraphQL */ `
           unit
           packing
           salePrice
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        warehouse {
+          id
+          name
+          address
           createdAt
           updatedAt
           _version
@@ -323,6 +345,7 @@ export const deleteOrder = /* GraphQL */ `
       inventory {
         id
         productID
+        wareHouseID
         locationID
         product {
           id
@@ -331,6 +354,16 @@ export const deleteOrder = /* GraphQL */ `
           unit
           packing
           salePrice
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        warehouse {
+          id
+          name
+          address
           createdAt
           updatedAt
           _version
@@ -762,6 +795,7 @@ export const createProduct = /* GraphQL */ `
         items {
           id
           productID
+          wareHouseID
           locationID
           quantity
           createdAt
@@ -816,6 +850,7 @@ export const updateProduct = /* GraphQL */ `
         items {
           id
           productID
+          wareHouseID
           locationID
           quantity
           createdAt
@@ -870,6 +905,7 @@ export const deleteProduct = /* GraphQL */ `
         items {
           id
           productID
+          wareHouseID
           locationID
           quantity
           createdAt
@@ -934,6 +970,22 @@ export const createWareHouse = /* GraphQL */ `
         nextToken
         startedAt
       }
+      inventories {
+        items {
+          id
+          productID
+          wareHouseID
+          locationID
+          quantity
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -956,6 +1008,22 @@ export const updateWareHouse = /* GraphQL */ `
           id
           name
           wareHouseID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      inventories {
+        items {
+          id
+          productID
+          wareHouseID
+          locationID
+          quantity
           createdAt
           updatedAt
           _version
@@ -996,6 +1064,22 @@ export const deleteWareHouse = /* GraphQL */ `
         nextToken
         startedAt
       }
+      inventories {
+        items {
+          id
+          productID
+          wareHouseID
+          locationID
+          quantity
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -1021,6 +1105,10 @@ export const createLocation = /* GraphQL */ `
           nextToken
           startedAt
         }
+        inventories {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -1031,6 +1119,7 @@ export const createLocation = /* GraphQL */ `
         items {
           id
           productID
+          wareHouseID
           locationID
           quantity
           createdAt
@@ -1067,6 +1156,10 @@ export const updateLocation = /* GraphQL */ `
           nextToken
           startedAt
         }
+        inventories {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -1077,6 +1170,7 @@ export const updateLocation = /* GraphQL */ `
         items {
           id
           productID
+          wareHouseID
           locationID
           quantity
           createdAt
@@ -1113,6 +1207,10 @@ export const deleteLocation = /* GraphQL */ `
           nextToken
           startedAt
         }
+        inventories {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -1123,6 +1221,7 @@ export const deleteLocation = /* GraphQL */ `
         items {
           id
           productID
+          wareHouseID
           locationID
           quantity
           createdAt
@@ -1150,6 +1249,7 @@ export const createInventory = /* GraphQL */ `
     createInventory(input: $input, condition: $condition) {
       id
       productID
+      wareHouseID
       locationID
       product {
         id
@@ -1163,6 +1263,24 @@ export const createInventory = /* GraphQL */ `
         packing
         salePrice
         orders {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      warehouse {
+        id
+        name
+        address
+        locations {
+          nextToken
+          startedAt
+        }
+        inventories {
           nextToken
           startedAt
         }
@@ -1213,6 +1331,7 @@ export const updateInventory = /* GraphQL */ `
     updateInventory(input: $input, condition: $condition) {
       id
       productID
+      wareHouseID
       locationID
       product {
         id
@@ -1226,6 +1345,24 @@ export const updateInventory = /* GraphQL */ `
         packing
         salePrice
         orders {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      warehouse {
+        id
+        name
+        address
+        locations {
+          nextToken
+          startedAt
+        }
+        inventories {
           nextToken
           startedAt
         }
@@ -1276,6 +1413,7 @@ export const deleteInventory = /* GraphQL */ `
     deleteInventory(input: $input, condition: $condition) {
       id
       productID
+      wareHouseID
       locationID
       product {
         id
@@ -1289,6 +1427,24 @@ export const deleteInventory = /* GraphQL */ `
         packing
         salePrice
         orders {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      warehouse {
+        id
+        name
+        address
+        locations {
+          nextToken
+          startedAt
+        }
+        inventories {
           nextToken
           startedAt
         }

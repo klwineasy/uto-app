@@ -6,8 +6,9 @@ import { EntityState, EntityResult } from '.';
 
 export interface ProductContextProps {
   products: EntityResult<Product[]>;
-  getProduct: (productCode: string) => Promise<Product[] | undefined>;
+  getProduct: (product: Product) => Promise<Product | undefined>;
   createProduct: (product: Product) => Promise<void>;
+  updateProduct: (product: Product) => Promise<void>;
   deleteProduct: (product: Product) => Promise<void>;
 }
 
@@ -58,12 +59,10 @@ export const ProductProvider = (props: ProductProviderProps) => {
     }
   };
 
-  const getProduct = async (productCode: string) => {
+  const getProduct = async (product: Product) => {
     try {
-      const product = await DataStore.query(Product, (o) =>
-        o.code('eq', productCode)
-      );
-      return product;
+      const productFetched = await DataStore.query(Product, product.id);
+      return productFetched;
     } catch (err: any) {
       console.error(err.message);
     }
@@ -71,8 +70,28 @@ export const ProductProvider = (props: ProductProviderProps) => {
 
   const createProduct = async (product: Product) => {
     try {
-      const result = await DataStore.save(new Product(product));
-      console.log(result);
+      await DataStore.save(new Product(product));
+    } catch (err: any) {
+      console.error(err.message);
+    }
+  };
+
+  const updateProduct = async (product: Product) => {
+    try {
+      const original = await getProduct(product);
+      if (original) {
+        await DataStore.save(
+          Product.copyOf(original, (updated) => {
+            updated.code = product.code;
+            updated.description = product.description;
+            updated.packing = product.packing;
+            updated.unit = product.unit;
+            updated.salePrice = product.salePrice;
+          })
+        );
+      } else {
+        console.log(product.code + 'does not exist in database.');
+      }
     } catch (err: any) {
       console.error(err.message);
     }
@@ -90,6 +109,7 @@ export const ProductProvider = (props: ProductProviderProps) => {
     products,
     getProduct,
     createProduct,
+    updateProduct,
     deleteProduct,
   };
 

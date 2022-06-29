@@ -1,6 +1,12 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useEffect, createContext, useContext } from 'react';
+import { useImmer } from 'use-immer';
+import { DataStore } from 'aws-amplify';
+import { Product, Inventory } from '../models';
+import { EntityState, EntityResult } from '.';
 
-export interface InventoryContextProps {}
+export interface InventoryContextProps {
+  getInventoryByProduct: (product: Product) => Promise<Inventory[]>;
+}
 
 export interface InventoryProviderProps {
   children: React.ReactElement;
@@ -11,7 +17,16 @@ export const InventoryContext = createContext({} as InventoryContextProps);
 export const InventoryProvider = (props: InventoryProviderProps) => {
   const { children } = props;
 
-  const context: InventoryContextProps = {};
+  const getInventoryByProduct = async (product: Product) => {
+    const currentInventory = (await DataStore.query(Inventory)).filter(
+      (o) => o.product?.id === product.id
+    );
+    return currentInventory;
+  };
+
+  const context: InventoryContextProps = {
+    getInventoryByProduct,
+  };
 
   return (
     <InventoryContext.Provider value={context}>

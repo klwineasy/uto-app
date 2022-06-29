@@ -78,6 +78,7 @@ export const onCreateOrder = /* GraphQL */ `
       inventory {
         id
         productID
+        wareHouseID
         locationID
         product {
           id
@@ -86,6 +87,16 @@ export const onCreateOrder = /* GraphQL */ `
           unit
           packing
           salePrice
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        warehouse {
+          id
+          name
+          address
           createdAt
           updatedAt
           _version
@@ -196,6 +207,7 @@ export const onUpdateOrder = /* GraphQL */ `
       inventory {
         id
         productID
+        wareHouseID
         locationID
         product {
           id
@@ -204,6 +216,16 @@ export const onUpdateOrder = /* GraphQL */ `
           unit
           packing
           salePrice
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        warehouse {
+          id
+          name
+          address
           createdAt
           updatedAt
           _version
@@ -314,6 +336,7 @@ export const onDeleteOrder = /* GraphQL */ `
       inventory {
         id
         productID
+        wareHouseID
         locationID
         product {
           id
@@ -322,6 +345,16 @@ export const onDeleteOrder = /* GraphQL */ `
           unit
           packing
           salePrice
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        warehouse {
+          id
+          name
+          address
           createdAt
           updatedAt
           _version
@@ -723,6 +756,7 @@ export const onCreateProduct = /* GraphQL */ `
         items {
           id
           productID
+          wareHouseID
           locationID
           quantity
           createdAt
@@ -774,6 +808,7 @@ export const onUpdateProduct = /* GraphQL */ `
         items {
           id
           productID
+          wareHouseID
           locationID
           quantity
           createdAt
@@ -825,6 +860,7 @@ export const onDeleteProduct = /* GraphQL */ `
         items {
           id
           productID
+          wareHouseID
           locationID
           quantity
           createdAt
@@ -886,6 +922,22 @@ export const onCreateWareHouse = /* GraphQL */ `
         nextToken
         startedAt
       }
+      inventories {
+        items {
+          id
+          productID
+          wareHouseID
+          locationID
+          quantity
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -905,6 +957,22 @@ export const onUpdateWareHouse = /* GraphQL */ `
           id
           name
           wareHouseID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      inventories {
+        items {
+          id
+          productID
+          wareHouseID
+          locationID
+          quantity
           createdAt
           updatedAt
           _version
@@ -942,6 +1010,22 @@ export const onDeleteWareHouse = /* GraphQL */ `
         nextToken
         startedAt
       }
+      inventories {
+        items {
+          id
+          productID
+          wareHouseID
+          locationID
+          quantity
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -964,6 +1048,10 @@ export const onCreateLocation = /* GraphQL */ `
           nextToken
           startedAt
         }
+        inventories {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -974,6 +1062,7 @@ export const onCreateLocation = /* GraphQL */ `
         items {
           id
           productID
+          wareHouseID
           locationID
           quantity
           createdAt
@@ -1007,6 +1096,10 @@ export const onUpdateLocation = /* GraphQL */ `
           nextToken
           startedAt
         }
+        inventories {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -1017,6 +1110,7 @@ export const onUpdateLocation = /* GraphQL */ `
         items {
           id
           productID
+          wareHouseID
           locationID
           quantity
           createdAt
@@ -1050,6 +1144,10 @@ export const onDeleteLocation = /* GraphQL */ `
           nextToken
           startedAt
         }
+        inventories {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -1060,6 +1158,7 @@ export const onDeleteLocation = /* GraphQL */ `
         items {
           id
           productID
+          wareHouseID
           locationID
           quantity
           createdAt
@@ -1084,6 +1183,7 @@ export const onCreateInventory = /* GraphQL */ `
     onCreateInventory {
       id
       productID
+      wareHouseID
       locationID
       product {
         id
@@ -1097,6 +1197,24 @@ export const onCreateInventory = /* GraphQL */ `
         packing
         salePrice
         orders {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      warehouse {
+        id
+        name
+        address
+        locations {
+          nextToken
+          startedAt
+        }
+        inventories {
           nextToken
           startedAt
         }
@@ -1144,6 +1262,7 @@ export const onUpdateInventory = /* GraphQL */ `
     onUpdateInventory {
       id
       productID
+      wareHouseID
       locationID
       product {
         id
@@ -1157,6 +1276,24 @@ export const onUpdateInventory = /* GraphQL */ `
         packing
         salePrice
         orders {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      warehouse {
+        id
+        name
+        address
+        locations {
+          nextToken
+          startedAt
+        }
+        inventories {
           nextToken
           startedAt
         }
@@ -1204,6 +1341,7 @@ export const onDeleteInventory = /* GraphQL */ `
     onDeleteInventory {
       id
       productID
+      wareHouseID
       locationID
       product {
         id
@@ -1217,6 +1355,24 @@ export const onDeleteInventory = /* GraphQL */ `
         packing
         salePrice
         orders {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      warehouse {
+        id
+        name
+        address
+        locations {
+          nextToken
+          startedAt
+        }
+        inventories {
           nextToken
           startedAt
         }

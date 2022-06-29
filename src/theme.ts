@@ -8,10 +8,7 @@ export const theme = createTheme({
       main: 'rgba(0,0,0)',
     },
     secondary: {
-      main: '#1E2761',
-    },
-    error: {
-      main: red.A400,
+      main: '#ec7211',
     },
   },
 });

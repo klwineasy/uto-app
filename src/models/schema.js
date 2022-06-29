@@ -528,6 +528,19 @@ export const schema = {
                         "targetName": "productID"
                     }
                 },
+                "warehouse": {
+                    "name": "warehouse",
+                    "isArray": false,
+                    "type": {
+                        "model": "WareHouse"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "wareHouseID"
+                    }
+                },
                 "location": {
                     "name": "location",
                     "isArray": false,
@@ -584,11 +597,98 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
+                        "name": "inventoryByWareHouse",
+                        "fields": [
+                            "wareHouseID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
                         "name": "inventoryByLocation",
                         "fields": [
                             "locationID"
                         ]
                     }
+                }
+            ]
+        },
+        "WareHouse": {
+            "name": "WareHouse",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "address": {
+                    "name": "address",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "locations": {
+                    "name": "locations",
+                    "isArray": true,
+                    "type": {
+                        "model": "Location"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "wareHouse"
+                    }
+                },
+                "inventories": {
+                    "name": "inventories",
+                    "isArray": true,
+                    "type": {
+                        "model": "Inventory"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "warehouse"
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "WareHouses",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
                 }
             ]
         },
@@ -670,73 +770,9 @@ export const schema = {
                     }
                 }
             ]
-        },
-        "WareHouse": {
-            "name": "WareHouse",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "address": {
-                    "name": "address",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "locations": {
-                    "name": "locations",
-                    "isArray": true,
-                    "type": {
-                        "model": "Location"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "wareHouse"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "WareHouses",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                }
-            ]
         }
     },
     "enums": {},
     "nonModels": {},
-    "version": "e11122423f112de7205673b9088c6d46"
+    "version": "bd1518c8c4d693fe4074a7741d577d5d"
 };

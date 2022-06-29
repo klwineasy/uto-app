@@ -28,11 +28,11 @@ type InventoryMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type LocationMetaData = {
+type WareHouseMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type WareHouseMetaData = {
+type LocationMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -113,12 +113,25 @@ export declare class Product {
 export declare class Inventory {
   readonly id: string;
   readonly product?: Product | null;
+  readonly warehouse?: WareHouse | null;
   readonly location?: Location | null;
   readonly quantity: number;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Inventory, InventoryMetaData>);
   static copyOf(source: Inventory, mutator: (draft: MutableModel<Inventory, InventoryMetaData>) => MutableModel<Inventory, InventoryMetaData> | void): Inventory;
+}
+
+export declare class WareHouse {
+  readonly id: string;
+  readonly name: string;
+  readonly address: string;
+  readonly locations?: (Location | null)[] | null;
+  readonly inventories?: (Inventory | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<WareHouse, WareHouseMetaData>);
+  static copyOf(source: WareHouse, mutator: (draft: MutableModel<WareHouse, WareHouseMetaData>) => MutableModel<WareHouse, WareHouseMetaData> | void): WareHouse;
 }
 
 export declare class Location {
@@ -130,15 +143,4 @@ export declare class Location {
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Location, LocationMetaData>);
   static copyOf(source: Location, mutator: (draft: MutableModel<Location, LocationMetaData>) => MutableModel<Location, LocationMetaData> | void): Location;
-}
-
-export declare class WareHouse {
-  readonly id: string;
-  readonly name: string;
-  readonly address: string;
-  readonly locations?: (Location | null)[] | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  constructor(init: ModelInit<WareHouse, WareHouseMetaData>);
-  static copyOf(source: WareHouse, mutator: (draft: MutableModel<WareHouse, WareHouseMetaData>) => MutableModel<WareHouse, WareHouseMetaData> | void): WareHouse;
 }

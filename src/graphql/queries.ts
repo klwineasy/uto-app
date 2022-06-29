@@ -78,6 +78,7 @@ export const getOrder = /* GraphQL */ `
       inventory {
         id
         productID
+        wareHouseID
         locationID
         product {
           id
@@ -86,6 +87,16 @@ export const getOrder = /* GraphQL */ `
           unit
           packing
           salePrice
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        warehouse {
+          id
+          name
+          address
           createdAt
           updatedAt
           _version
@@ -166,6 +177,7 @@ export const listOrders = /* GraphQL */ `
         inventory {
           id
           productID
+          wareHouseID
           locationID
           quantity
           createdAt
@@ -240,6 +252,7 @@ export const syncOrders = /* GraphQL */ `
         inventory {
           id
           productID
+          wareHouseID
           locationID
           quantity
           createdAt
@@ -623,6 +636,7 @@ export const getProduct = /* GraphQL */ `
         items {
           id
           productID
+          wareHouseID
           locationID
           quantity
           createdAt
@@ -756,6 +770,22 @@ export const getWareHouse = /* GraphQL */ `
         nextToken
         startedAt
       }
+      inventories {
+        items {
+          id
+          productID
+          wareHouseID
+          locationID
+          quantity
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -776,6 +806,10 @@ export const listWareHouses = /* GraphQL */ `
         name
         address
         locations {
+          nextToken
+          startedAt
+        }
+        inventories {
           nextToken
           startedAt
         }
@@ -811,6 +845,10 @@ export const syncWareHouses = /* GraphQL */ `
           nextToken
           startedAt
         }
+        inventories {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -836,6 +874,10 @@ export const getLocation = /* GraphQL */ `
           nextToken
           startedAt
         }
+        inventories {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -846,6 +888,7 @@ export const getLocation = /* GraphQL */ `
         items {
           id
           productID
+          wareHouseID
           locationID
           quantity
           createdAt
@@ -948,6 +991,7 @@ export const getInventory = /* GraphQL */ `
     getInventory(id: $id) {
       id
       productID
+      wareHouseID
       locationID
       product {
         id
@@ -961,6 +1005,24 @@ export const getInventory = /* GraphQL */ `
         packing
         salePrice
         orders {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      warehouse {
+        id
+        name
+        address
+        locations {
+          nextToken
+          startedAt
+        }
+        inventories {
           nextToken
           startedAt
         }
@@ -1013,6 +1075,7 @@ export const listInventories = /* GraphQL */ `
       items {
         id
         productID
+        wareHouseID
         locationID
         product {
           id
@@ -1021,6 +1084,16 @@ export const listInventories = /* GraphQL */ `
           unit
           packing
           salePrice
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        warehouse {
+          id
+          name
+          address
           createdAt
           updatedAt
           _version
@@ -1065,6 +1138,7 @@ export const syncInventories = /* GraphQL */ `
       items {
         id
         productID
+        wareHouseID
         locationID
         product {
           id
@@ -1073,6 +1147,16 @@ export const syncInventories = /* GraphQL */ `
           unit
           packing
           salePrice
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        warehouse {
+          id
+          name
+          address
           createdAt
           updatedAt
           _version
