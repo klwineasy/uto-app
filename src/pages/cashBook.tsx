@@ -1,4 +1,5 @@
 import * as React from "react";
+import type { NextPage } from "next";
 import {
   Box,
   Table,
@@ -8,8 +9,12 @@ import {
   TableHead,
   TableRow,
   Paper,
+  TextField,
 } from "@mui/material";
 import TrapFocus from "@mui/base/TrapFocus";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 function createData(
   invoice: string,
@@ -60,7 +65,24 @@ const rows = [
   ),
 ];
 
-export default function BasicTrapFocus() {
+function Calendar(props: any) {
+  const [value, setValue] = React.useState<Date | null>(null);
+
+  return (
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <DatePicker
+        label="Basic example"
+        value={value}
+        onChange={(newValue) => {
+          setValue(newValue);
+        }}
+        renderInput={(params) => <TextField {...params} />}
+      />
+    </LocalizationProvider>
+  );
+}
+
+const cashBook = () => {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -119,4 +141,6 @@ export default function BasicTrapFocus() {
       )}
     </Box>
   );
-}
+};
+
+export default cashBook;
