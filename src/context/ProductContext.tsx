@@ -1,8 +1,8 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
-import { DataStore } from 'aws-amplify';
-import { useImmer } from 'use-immer';
-import { Product } from '../models';
-import { EntityState, EntityResult } from '.';
+import React, { useState, useEffect, createContext, useContext } from "react";
+import { DataStore } from "aws-amplify";
+import { useImmer } from "use-immer";
+import { Product } from "../models";
+import { EntityState, EntityResult } from ".";
 
 export interface ProductContextProps {
   products: EntityResult<Product[]>;
@@ -10,6 +10,7 @@ export interface ProductContextProps {
   createProduct: (product: Product) => Promise<void>;
   updateProduct: (product: Product) => Promise<void>;
   deleteProduct: (product: Product) => Promise<void>;
+  getProductById: (productID: string) => Promise<Product | undefined>;
 }
 
 export interface ProductProviderProps {
@@ -68,6 +69,15 @@ export const ProductProvider = (props: ProductProviderProps) => {
     }
   };
 
+  const getProductById = async (productID: string) => {
+    try {
+      const productFetched = await DataStore.query(Product, productID);
+      console.log(productFetched);
+      return productFetched;
+    } catch (err: any) {
+      console.error(err.message);
+    }
+  };
   const createProduct = async (product: Product) => {
     try {
       await DataStore.save(new Product(product));
@@ -90,7 +100,7 @@ export const ProductProvider = (props: ProductProviderProps) => {
           })
         );
       } else {
-        console.log(product.code + 'does not exist in database.');
+        console.log(product.code + "does not exist in database.");
       }
     } catch (err: any) {
       console.error(err.message);
@@ -111,6 +121,7 @@ export const ProductProvider = (props: ProductProviderProps) => {
     createProduct,
     updateProduct,
     deleteProduct,
+    getProductById,
   };
 
   return (
@@ -124,7 +135,7 @@ export const useProduct = () => {
   const context = useContext(ProductContext);
 
   if (context === undefined) {
-    throw new Error('useProduct must be used within a ProductProvider');
+    throw new Error("useProduct must be used within a ProductProvider");
   }
 
   return {

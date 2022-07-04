@@ -1,10 +1,7 @@
-import * as React from 'react';
-import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import * as React from "react";
+import { TextField, Fade, Modal, Backdrop } from "@mui/material";
+import ClearIcon from "@mui/icons-material/Clear";
+import { Box, Container, Stack, Typography, Button } from "@mui/material";
 
 type Props = {
   openState: boolean;
@@ -12,15 +9,27 @@ type Props = {
 };
 
 const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+};
+const style1 = {
+  position: "absolute" as "absolute",
+  top: "10%",
+  right: "0%",
+  transform: "translate(-10%, -50%)",
+  width: 40,
+  bgcolor: "background.paper",
+};
+const tableRowStyle = {
+  weight: "bold",
+  size: "18px",
 };
 
 export const ItemCreate = (props: Props) => {
@@ -31,8 +40,8 @@ export const ItemCreate = (props: Props) => {
   return (
     <div>
       <Modal
-        aria-labelledby='transition-modal-title'
-        aria-describedby='transition-modal-description'
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
         open={openState}
         onClose={handleClose}
         closeAfterTransition
@@ -42,11 +51,63 @@ export const ItemCreate = (props: Props) => {
         }}>
         <Fade in={openState}>
           <Box sx={style}>
-            <Typography id='transition-modal-title' variant='h6' component='h2'>
+            <ClearIcon sx={style1} onClick={handleClose} />
+            <Typography id="transition-modal-title" variant="h6" component="h2">
               Create Item
             </Typography>
-            <Typography id='transition-modal-description' sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            <Typography>
+              <Box
+                component="form"
+                sx={{
+                  "& > :not(style)": { m: 1, width: "35ch", height: "5ch" },
+                }}
+                noValidate
+                autoComplete="off">
+                <TextField
+                  id="outlined-basic"
+                  label="Code"
+                  name="code"
+                  variant="outlined"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Description"
+                  name="description"
+                  variant="outlined"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Sale Price"
+                  name="salePrice"
+                  variant="outlined"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Unit"
+                  variant="outlined"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Packing"
+                  variant="outlined"
+                />
+                <Stack direction="row" spacing={2}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    sx={{ fontWeight: "bold" }}
+                    onClick={handleOpen}>
+                    Save
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    sx={{ fontWeight: "bold" }}
+                    onClick={handleClose}>
+                    Cancel
+                  </Button>
+                </Stack>
+              </Box>
             </Typography>
           </Box>
         </Fade>
