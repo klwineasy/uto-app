@@ -1,14 +1,20 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  createContext,
+  useContext,
+} from 'react';
 import { DataStore } from 'aws-amplify';
 import { useImmer } from 'use-immer';
-import { Product } from '../models';
-import { EntityState, EntityResult } from '.';
+import { Product } from '../../models';
+import { EntityState, EntityResult } from '../';
+import { usePrompt, ProductCreateForm } from '../../components';
 
 export interface ProductContextProps {
   products: EntityResult<Product[]>;
   getProduct: (product: Product) => Promise<Product | undefined>;
   createProduct: (product: Product) => Promise<void>;
-  updateProduct: (product: Product) => Promise<void>;
+  updateProduct: (id: string, product: Product) => Promise<void>;
   deleteProduct: (product: Product) => Promise<void>;
 }
 
@@ -68,7 +74,7 @@ export const ProductProvider = (props: ProductProviderProps) => {
     }
   };
 
-  const createProduct = async (product: Product) => {
+  const createProduct = async (product: any) => {
     try {
       await DataStore.save(new Product(product));
     } catch (err: any) {
@@ -76,7 +82,7 @@ export const ProductProvider = (props: ProductProviderProps) => {
     }
   };
 
-  const updateProduct = async (product: Product) => {
+  const updateProduct = async (id: string, product: Product) => {
     try {
       const original = await getProduct(product);
       if (original) {
@@ -90,7 +96,7 @@ export const ProductProvider = (props: ProductProviderProps) => {
           })
         );
       } else {
-        console.log(product.code + 'does not exist in database.');
+        console.error(product.code + 'does not exist in database.');
       }
     } catch (err: any) {
       console.error(err.message);
@@ -122,6 +128,23 @@ export const ProductProvider = (props: ProductProviderProps) => {
 
 export const useProduct = () => {
   const context = useContext(ProductContext);
+  const { products } = context;
+  const { setPromptTitle, setPromptContent, showPrompt } = usePrompt();
+
+  const createProductHandler = useCallback(
+    async (
+      e:
+        | React.MouseEvent<HTMLAnchorElement, MouseEvent>
+        | React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+      e.stopPropagation();
+
+      setPromptTitle('Create Product');
+      setPromptContent(<ProductCreateForm />);
+      showPrompt();
+    },
+    [products]
+  );
 
   if (context === undefined) {
     throw new Error('useProduct must be used within a ProductProvider');
@@ -129,5 +152,6 @@ export const useProduct = () => {
 
   return {
     ...context,
+    createProductHandler,
   };
 };

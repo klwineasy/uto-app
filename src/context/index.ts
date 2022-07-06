@@ -1,9 +1,9 @@
-export * from './AmplifyContext';
-export * from './ProductContext';
-export * from './EmployeeContext';
-export * from './WareHouseContext';
-export * from './LocationContext';
-export * from './InventoryContext';
+export * from './amplify';
+export * from './product';
+export * from './employee';
+export * from './warehouse';
+export * from './location';
+export * from './inventory';
 
 export enum EntityState {
   LOADING,

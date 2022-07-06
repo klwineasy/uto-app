@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Inventory } from '../models';
+import React from 'react';
 import {
   Box,
   Container,
@@ -18,29 +17,14 @@ import {
   InputBase,
   Button,
 } from '@mui/material';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
-import LastPageIcon from '@mui/icons-material/LastPage';
 import { Navbar } from '../components';
-import { useProduct, useInventory } from '../context';
-import { useTheme } from '@mui/material/styles';
-import {
-  ItemTableRow,
-  ItemTablePagination,
-  ItemCreate,
-  ItemEdit,
-  ItemDelete,
-} from '../components';
+import { useProduct, ProductActionProvider } from '../context';
+import { ProductTableRow, ProductTablePagination } from '../components';
 
-const items = () => {
-  const { products, getProduct, createProduct, updateProduct, deleteProduct } =
-    useProduct();
-  const [openNewItemModal, setOpenNewItemModal] = useState(false);
-  const [openEditItemModal, setOpenEditItemModal] = useState(false);
-  const [openDeleteItemModal, setOpenDeleteItemModal] = useState(false);
+const products = () => {
+  const { products, createProductHandler } = useProduct();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -66,24 +50,6 @@ const items = () => {
 
   return (
     <Box>
-      {openNewItemModal && (
-        <ItemCreate
-          openState={openNewItemModal}
-          setOpenState={setOpenNewItemModal}
-        />
-      )}
-      {openEditItemModal && (
-        <ItemEdit
-          openState={openEditItemModal}
-          setOpenState={setOpenEditItemModal}
-        />
-      )}
-      {openDeleteItemModal && (
-        <ItemDelete
-          openState={openDeleteItemModal}
-          setOpenState={setOpenDeleteItemModal}
-        />
-      )}
       <Navbar />
       <Container maxWidth='xl' sx={{ marginY: 2 }}>
         <Stack
@@ -93,7 +59,7 @@ const items = () => {
           marginY={5}
           spacing={2}>
           <Typography variant='h3' component='h2'>
-            Items
+            Products
           </Typography>
           <Paper
             component='form'
@@ -117,7 +83,7 @@ const items = () => {
             color='secondary'
             sx={{ fontWeight: 'bold' }}
             startIcon={<AddIcon />}
-            onClick={() => setOpenNewItemModal(true)}>
+            onClick={createProductHandler}>
             New Item
           </Button>
         </Stack>
@@ -171,12 +137,11 @@ const items = () => {
                     {products.value &&
                       products.value.map((product) => {
                         return (
-                          <ItemTableRow
-                            key={product.id}
+                          <ProductActionProvider
                             product={product}
-                            openEditModal={setOpenEditItemModal}
-                            openDeleteModal={setOpenDeleteItemModal}
-                          />
+                            key={product.id}>
+                            <ProductTableRow key={product.id} />
+                          </ProductActionProvider>
                         );
                       })}
                     {emptyRows > 0 && (
@@ -206,7 +171,7 @@ const items = () => {
                         }}
                         onPageChange={handleChangePage}
                         onRowsPerPageChange={handleChangeRowsPerPage}
-                        ActionsComponent={ItemTablePagination}
+                        ActionsComponent={ProductTablePagination}
                       />
                     </TableRow>
                   </TableFooter>
@@ -220,4 +185,4 @@ const items = () => {
   );
 };
 
-export default items;
+export default products;

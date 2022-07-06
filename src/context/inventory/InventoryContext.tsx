@@ -1,8 +1,8 @@
 import React, { useEffect, createContext, useContext } from 'react';
 import { useImmer } from 'use-immer';
 import { DataStore } from 'aws-amplify';
-import { Product, Inventory } from '../models';
-import { EntityState, EntityResult } from '.';
+import { Product, Inventory } from '../../models';
+import { EntityState, EntityResult } from '../';
 
 export interface InventoryContextProps {
   getInventoryByProduct: (product: Product) => Promise<Inventory[]>;

@@ -14,6 +14,12 @@ import {
   LocationProvider,
   InventoryProvider,
 } from '../context';
+import {
+  PromptProvider,
+  Prompt,
+  NotificationProvider,
+  Notification,
+} from '../components';
 import '../../styles/globals.css';
 
 import { Amplify } from 'aws-amplify';
@@ -35,21 +41,27 @@ export default function MyApp(props: MyAppProps) {
         <meta name='viewport' content='initial-scale=1, width=device-width' />
       </Head>
       <AmplifyProvider>
-        <ProductProvider>
-          <EmployeeProvider>
-            <WareHouseProvider>
-              <LocationProvider>
-                <InventoryProvider>
-                  <ThemeProvider theme={theme}>
-                    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-                    <CssBaseline />
-                    <Component {...pageProps} />
-                  </ThemeProvider>
-                </InventoryProvider>
-              </LocationProvider>
-            </WareHouseProvider>
-          </EmployeeProvider>
-        </ProductProvider>
+        <NotificationProvider>
+          <PromptProvider>
+            <ProductProvider>
+              <EmployeeProvider>
+                <WareHouseProvider>
+                  <LocationProvider>
+                    <InventoryProvider>
+                      <ThemeProvider theme={theme}>
+                        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+                        <CssBaseline />
+                        <Notification />
+                        <Prompt />
+                        <Component {...pageProps} />
+                      </ThemeProvider>
+                    </InventoryProvider>
+                  </LocationProvider>
+                </WareHouseProvider>
+              </EmployeeProvider>
+            </ProductProvider>
+          </PromptProvider>
+        </NotificationProvider>
       </AmplifyProvider>
     </CacheProvider>
   );

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Product, Inventory } from '../../models';
-import { useInventory } from '../../context';
+import { useInventory, useProductAction } from '../../context';
 import {
   Box,
   Stack,
@@ -18,22 +18,18 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-interface Props {
-  product: Product;
-  openEditModal: React.Dispatch<React.SetStateAction<boolean>>;
-  openDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
-}
+interface Props {}
 
-export const ItemTableRow = (props: Props) => {
-  const { product, openEditModal, openDeleteModal } = props;
+export const ProductTableRow = (props: Props) => {
+  const { product, editProductHandler } = useProductAction();
   const { getInventoryByProduct } = useInventory();
   const [open, setOpen] = React.useState(false);
   const [inventories, setInventories] = useState<Inventory[]>([]);
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
   const handleOpenInventory = async () => {
-    const result = await getInventoryByProduct(product);
-    console.log(result);
+    if (!product.value) return;
+    const result = await getInventoryByProduct(product.value);
     setInventories(result);
   };
 
@@ -52,12 +48,20 @@ export const ItemTableRow = (props: Props) => {
           </IconButton>
         </TableCell>
         <TableCell component='th' scope='row'>
-          {product.code}
+          {product.value && product.value.code}
         </TableCell>
-        <TableCell align='left'>{product.description}</TableCell>
-        <TableCell align='left'>{product.salePrice}</TableCell>
-        <TableCell align='left'>{product.unit}</TableCell>
-        <TableCell align='left'>{product.packing}</TableCell>
+        <TableCell align='left'>
+          {product.value && product.value.description}
+        </TableCell>
+        <TableCell align='left'>
+          {product.value && product.value.salePrice}
+        </TableCell>
+        <TableCell align='left'>
+          {product.value && product.value.unit}
+        </TableCell>
+        <TableCell align='left'>
+          {product.value && product.value.packing}
+        </TableCell>
         <TableCell>
           {' '}
           <Stack direction='row' spacing={2}>
@@ -65,7 +69,6 @@ export const ItemTableRow = (props: Props) => {
               variant='contained'
               startIcon={<DeleteIcon />}
               color='secondary'
-              onClick={() => openDeleteModal(true)}
               sx={{ fontWeight: 'bold' }}>
               Delete
             </Button>
@@ -73,8 +76,8 @@ export const ItemTableRow = (props: Props) => {
               variant='contained'
               startIcon={<EditIcon />}
               color='secondary'
-              onClick={() => openEditModal(true)}
-              sx={{ fontWeight: 'bold' }}>
+              sx={{ fontWeight: 'bold' }}
+              onClick={editProductHandler}>
               Edit
             </Button>
           </Stack>

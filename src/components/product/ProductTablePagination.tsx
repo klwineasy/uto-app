@@ -16,7 +16,7 @@ interface TablePaginationActionsProps {
   ) => void;
 }
 
-export const ItemTablePagination = (props: TablePaginationActionsProps) => {
+export const ProductTablePagination = (props: TablePaginationActionsProps) => {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
 
@@ -81,5 +81,3 @@ export const ItemTablePagination = (props: TablePaginationActionsProps) => {
     </Box>
   );
 };
-
-export default ItemTablePagination;
