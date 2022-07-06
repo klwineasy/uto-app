@@ -5,9 +5,9 @@ import {
   Container,
   Grid,
   Button,
-  IconButton,
   TextField,
   DialogActions,
+  MenuItem,
 } from '@mui/material';
 import { usePrompt } from '../../prompt';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
@@ -125,7 +125,7 @@ export const ProductEditForm = (props: Props) => {
                   fullWidth
                 />
               )}
-              rules={{ required: 'Sale Price required' }}
+              rules={{ required: 'Sale Price required', pattern: /^\d+$/ }}
             />
           </Grid>
           <Grid item xs={4}>
@@ -140,12 +140,20 @@ export const ProductEditForm = (props: Props) => {
                 <TextField
                   label='Unit'
                   variant='filled'
+                  select
                   value={value}
                   onChange={onChange}
                   error={!!error}
                   helperText={error ? error.message : null}
-                  fullWidth
-                />
+                  fullWidth>
+                  <MenuItem value={'Box'}>Box</MenuItem>
+                  <MenuItem value={'Ft'}>Ft</MenuItem>
+                  <MenuItem value={'Pack'}>Pack</MenuItem>
+                  <MenuItem value={'Pair'}>Pair</MenuItem>
+                  <MenuItem value={'Pcs'}>Pcs</MenuItem>
+                  <MenuItem value={'Roll'}>Roll</MenuItem>
+                  <MenuItem value={'Set'}>Set</MenuItem>
+                </TextField>
               )}
               rules={{ required: 'Unit required' }}
             />
