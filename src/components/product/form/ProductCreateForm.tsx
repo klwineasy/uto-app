@@ -120,7 +120,7 @@ export const ProductCreateForm = (props: Props) => {
                   fullWidth
                 />
               )}
-              rules={{ required: 'Sale Price required' }}
+              rules={{ required: 'Sale Price required', pattern: /^\d+$/ }}
             />
           </Grid>
           <Grid item xs={4}>
