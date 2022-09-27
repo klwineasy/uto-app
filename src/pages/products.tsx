@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Container,
@@ -22,9 +22,11 @@ import AddIcon from '@mui/icons-material/Add';
 import { Navbar } from '../components';
 import { useProduct, ProductActionProvider } from '../context';
 import { ProductTableRow, ProductTablePagination } from '../components';
+import { Product } from '../models';
 
 const products = () => {
   const { products, createProductHandler } = useProduct();
+  const [searchedProduct, setSearchedProduct] = useState<Product[]>();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -46,6 +48,22 @@ const products = () => {
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+  };
+
+  const handleSearchProducts = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const searchValue = e.target.value.toLowerCase();
+    if (products.value && searchValue.length > 0) {
+      const searchedProducts = products.value.filter(
+        (product) =>
+          product.description.toLowerCase().includes(searchValue) ||
+          product.code.toLocaleLowerCase().includes(searchValue)
+      );
+      setSearchedProduct(searchedProducts);
+    } else {
+      setSearchedProduct(products.value);
+    }
   };
 
   return (
@@ -73,6 +91,7 @@ const products = () => {
               sx={{ flex: 2 }}
               placeholder='Search Items'
               inputProps={{ 'aria-label': 'search items' }}
+              onChange={handleSearchProducts}
             />
             <IconButton type='submit' sx={{ p: '10px' }} aria-label='search'>
               <SearchIcon />
@@ -134,7 +153,22 @@ const products = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {products.value &&
+                    {searchedProduct && searchedProduct.length > 0 ? (
+                      searchedProduct.map((product) => {
+                        return (
+                          <ProductActionProvider
+                            product={product}
+                            key={product.id}>
+                            <ProductTableRow key={product.id} />
+                          </ProductActionProvider>
+                        );
+                      })
+                    ) : searchedProduct && searchedProduct.length === 0 ? (
+                      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+                        <TableCell>No Product Found!</TableCell>
+                      </TableRow>
+                    ) : (
+                      products.value &&
                       products.value.map((product) => {
                         return (
                           <ProductActionProvider
@@ -143,7 +177,8 @@ const products = () => {
                             <ProductTableRow key={product.id} />
                           </ProductActionProvider>
                         );
-                      })}
+                      })
+                    )}
                     {emptyRows > 0 && (
                       <TableRow style={{ height: 53 * emptyRows }}>
                         <TableCell colSpan={6} />

@@ -1,5 +1,6 @@
 import React from 'react';
 import type { NextPage } from 'next';
+import { Navbar } from '../components';
 import { Container, AppBar, Toolbar, Typography, Box } from '@mui/material/';
 import { Authenticator, ThemeProvider } from '@aws-amplify/ui-react';
 import AppsIcon from '@mui/icons-material/Apps';
@@ -24,19 +25,7 @@ const formFields = {
 const Login: NextPage = () => {
   return (
     <ThemeProvider>
-      <AppBar position='relative'>
-        <Toolbar sx={{ justifyContent: 'center' }}>
-          <Typography
-            variant='h5'
-            component='h1'
-            color='#fff'
-            align='center'
-            noWrap>
-            UTO
-          </Typography>
-          <AppsIcon />
-        </Toolbar>
-      </AppBar>
+      <Navbar />
       <Container maxWidth='xs'>
         <Box
           sx={{
