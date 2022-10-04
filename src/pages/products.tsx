@@ -28,7 +28,7 @@ const products = () => {
   const { products, createProductHandler } = useProduct();
   const [searchedProduct, setSearchedProduct] = useState<Product[]>();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -154,30 +154,40 @@ const products = () => {
                   </TableHead>
                   <TableBody>
                     {searchedProduct && searchedProduct.length > 0 ? (
-                      searchedProduct.map((product) => {
-                        return (
-                          <ProductActionProvider
-                            product={product}
-                            key={product.id}>
-                            <ProductTableRow key={product.id} />
-                          </ProductActionProvider>
-                        );
-                      })
+                      searchedProduct
+                        .slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                        .map((product) => {
+                          return (
+                            <ProductActionProvider
+                              product={product}
+                              key={product.id}>
+                              <ProductTableRow key={product.id} />
+                            </ProductActionProvider>
+                          );
+                        })
                     ) : searchedProduct && searchedProduct.length === 0 ? (
                       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
                         <TableCell>No Product Found!</TableCell>
                       </TableRow>
                     ) : (
                       products.value &&
-                      products.value.map((product) => {
-                        return (
-                          <ProductActionProvider
-                            product={product}
-                            key={product.id}>
-                            <ProductTableRow key={product.id} />
-                          </ProductActionProvider>
-                        );
-                      })
+                      products.value
+                        .slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                        .map((product) => {
+                          return (
+                            <ProductActionProvider
+                              product={product}
+                              key={product.id}>
+                              <ProductTableRow key={product.id} />
+                            </ProductActionProvider>
+                          );
+                        })
                     )}
                     {emptyRows > 0 && (
                       <TableRow style={{ height: 53 * emptyRows }}>
@@ -195,7 +205,11 @@ const products = () => {
                           { label: 'All', value: -1 },
                         ]}
                         colSpan={7}
-                        count={products.value!.length}
+                        count={
+                          searchedProduct && searchedProduct.length > 0
+                            ? searchedProduct.length
+                            : products.value!.length
+                        }
                         rowsPerPage={rowsPerPage}
                         page={page}
                         SelectProps={{
