@@ -17,6 +17,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { numberWithCommas } from '../utils';
 
 interface Props {}
 
@@ -54,7 +55,7 @@ export const ProductTableRow = (props: Props) => {
           {product.value && product.value.description}
         </TableCell>
         <TableCell align='left'>
-          {product.value && product.value.salePrice}
+          {product.value && numberWithCommas(product.value.salePrice)}
         </TableCell>
         <TableCell align='left'>
           {product.value && product.value.unit}
