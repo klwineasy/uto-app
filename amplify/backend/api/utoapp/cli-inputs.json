@@ -3,15 +3,17 @@
   "serviceConfiguration": {
     "apiName": "utoapp",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/Users/kaunglwin/Documents/uto-app/amplify/backend/api/utoapp/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
-      "expirationTime": 7
+      "expirationTime": 364,
+      "apiKeyExpirationDate": "2023-10-25T05:49:23.753Z",
+      "keyDescription": "utoappapikey"
     },
     "conflictResolution": {
       "defaultResolutionStrategy": {
         "type": "OPTIMISTIC_CONCURRENCY"
       }
-    }
+    },
+    "additionalAuthTypes": []
   }
 }

@@ -645,6 +645,149 @@ export type ModelInventoryFilterInput = {
   not?: ModelInventoryFilterInput | null,
 };
 
+export type ModelSubscriptionOrderFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  receiptID?: ModelSubscriptionIDInput | null,
+  productID?: ModelSubscriptionIDInput | null,
+  quantity?: ModelSubscriptionIntInput | null,
+  inventoryID?: ModelSubscriptionIDInput | null,
+  pricePerUnit?: ModelSubscriptionFloatInput | null,
+  totalPrice?: ModelSubscriptionFloatInput | null,
+  date?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionOrderFilterInput | null > | null,
+  or?: Array< ModelSubscriptionOrderFilterInput | null > | null,
+};
+
+export type ModelSubscriptionIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
+};
+
+export type ModelSubscriptionFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
+};
+
+export type ModelSubscriptionStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionReceiptFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  status?: ModelSubscriptionStringInput | null,
+  date?: ModelSubscriptionStringInput | null,
+  customerID?: ModelSubscriptionIDInput | null,
+  subTotal?: ModelSubscriptionFloatInput | null,
+  discount?: ModelSubscriptionFloatInput | null,
+  total?: ModelSubscriptionFloatInput | null,
+  credit?: ModelSubscriptionBooleanInput | null,
+  creditDue?: ModelSubscriptionIntInput | null,
+  salesRepID?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionReceiptFilterInput | null > | null,
+  or?: Array< ModelSubscriptionReceiptFilterInput | null > | null,
+};
+
+export type ModelSubscriptionBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+};
+
+export type ModelSubscriptionEmployeeFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  startDate?: ModelSubscriptionStringInput | null,
+  phoneNumber?: ModelSubscriptionStringInput | null,
+  email?: ModelSubscriptionStringInput | null,
+  jobTitle?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionEmployeeFilterInput | null > | null,
+  or?: Array< ModelSubscriptionEmployeeFilterInput | null > | null,
+};
+
+export type ModelSubscriptionCustomerFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  phoneNumber?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionCustomerFilterInput | null > | null,
+  or?: Array< ModelSubscriptionCustomerFilterInput | null > | null,
+};
+
+export type ModelSubscriptionProductFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  code?: ModelSubscriptionStringInput | null,
+  description?: ModelSubscriptionStringInput | null,
+  unit?: ModelSubscriptionStringInput | null,
+  packing?: ModelSubscriptionStringInput | null,
+  salePrice?: ModelSubscriptionFloatInput | null,
+  and?: Array< ModelSubscriptionProductFilterInput | null > | null,
+  or?: Array< ModelSubscriptionProductFilterInput | null > | null,
+};
+
+export type ModelSubscriptionWareHouseFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  address?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionWareHouseFilterInput | null > | null,
+  or?: Array< ModelSubscriptionWareHouseFilterInput | null > | null,
+};
+
+export type ModelSubscriptionLocationFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  wareHouseID?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionLocationFilterInput | null > | null,
+  or?: Array< ModelSubscriptionLocationFilterInput | null > | null,
+};
+
+export type ModelSubscriptionInventoryFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  productID?: ModelSubscriptionIDInput | null,
+  wareHouseID?: ModelSubscriptionIDInput | null,
+  locationID?: ModelSubscriptionIDInput | null,
+  quantity?: ModelSubscriptionIntInput | null,
+  and?: Array< ModelSubscriptionInventoryFilterInput | null > | null,
+  or?: Array< ModelSubscriptionInventoryFilterInput | null > | null,
+};
+
 export type CreateOrderMutationVariables = {
   input: CreateOrderInput,
   condition?: ModelOrderConditionInput | null,
@@ -3593,6 +3736,10 @@ export type SyncInventoriesQuery = {
   } | null,
 };
 
+export type OnCreateOrderSubscriptionVariables = {
+  filter?: ModelSubscriptionOrderFilterInput | null,
+};
+
 export type OnCreateOrderSubscription = {
   onCreateOrder?:  {
     __typename: "Order",
@@ -3731,6 +3878,10 @@ export type OnCreateOrderSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
+};
+
+export type OnUpdateOrderSubscriptionVariables = {
+  filter?: ModelSubscriptionOrderFilterInput | null,
 };
 
 export type OnUpdateOrderSubscription = {
@@ -3873,6 +4024,10 @@ export type OnUpdateOrderSubscription = {
   } | null,
 };
 
+export type OnDeleteOrderSubscriptionVariables = {
+  filter?: ModelSubscriptionOrderFilterInput | null,
+};
+
 export type OnDeleteOrderSubscription = {
   onDeleteOrder?:  {
     __typename: "Order",
@@ -4013,6 +4168,10 @@ export type OnDeleteOrderSubscription = {
   } | null,
 };
 
+export type OnCreateReceiptSubscriptionVariables = {
+  filter?: ModelSubscriptionReceiptFilterInput | null,
+};
+
 export type OnCreateReceiptSubscription = {
   onCreateReceipt?:  {
     __typename: "Receipt",
@@ -4083,6 +4242,10 @@ export type OnCreateReceiptSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
+};
+
+export type OnUpdateReceiptSubscriptionVariables = {
+  filter?: ModelSubscriptionReceiptFilterInput | null,
 };
 
 export type OnUpdateReceiptSubscription = {
@@ -4157,6 +4320,10 @@ export type OnUpdateReceiptSubscription = {
   } | null,
 };
 
+export type OnDeleteReceiptSubscriptionVariables = {
+  filter?: ModelSubscriptionReceiptFilterInput | null,
+};
+
 export type OnDeleteReceiptSubscription = {
   onDeleteReceipt?:  {
     __typename: "Receipt",
@@ -4229,6 +4396,10 @@ export type OnDeleteReceiptSubscription = {
   } | null,
 };
 
+export type OnCreateEmployeeSubscriptionVariables = {
+  filter?: ModelSubscriptionEmployeeFilterInput | null,
+};
+
 export type OnCreateEmployeeSubscription = {
   onCreateEmployee?:  {
     __typename: "Employee",
@@ -4244,6 +4415,10 @@ export type OnCreateEmployeeSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
+};
+
+export type OnUpdateEmployeeSubscriptionVariables = {
+  filter?: ModelSubscriptionEmployeeFilterInput | null,
 };
 
 export type OnUpdateEmployeeSubscription = {
@@ -4263,6 +4438,10 @@ export type OnUpdateEmployeeSubscription = {
   } | null,
 };
 
+export type OnDeleteEmployeeSubscriptionVariables = {
+  filter?: ModelSubscriptionEmployeeFilterInput | null,
+};
+
 export type OnDeleteEmployeeSubscription = {
   onDeleteEmployee?:  {
     __typename: "Employee",
@@ -4278,6 +4457,10 @@ export type OnDeleteEmployeeSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
+};
+
+export type OnCreateCustomerSubscriptionVariables = {
+  filter?: ModelSubscriptionCustomerFilterInput | null,
 };
 
 export type OnCreateCustomerSubscription = {
@@ -4317,6 +4500,10 @@ export type OnCreateCustomerSubscription = {
   } | null,
 };
 
+export type OnUpdateCustomerSubscriptionVariables = {
+  filter?: ModelSubscriptionCustomerFilterInput | null,
+};
+
 export type OnUpdateCustomerSubscription = {
   onUpdateCustomer?:  {
     __typename: "Customer",
@@ -4354,6 +4541,10 @@ export type OnUpdateCustomerSubscription = {
   } | null,
 };
 
+export type OnDeleteCustomerSubscriptionVariables = {
+  filter?: ModelSubscriptionCustomerFilterInput | null,
+};
+
 export type OnDeleteCustomerSubscription = {
   onDeleteCustomer?:  {
     __typename: "Customer",
@@ -4389,6 +4580,10 @@ export type OnDeleteCustomerSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
+};
+
+export type OnCreateProductSubscriptionVariables = {
+  filter?: ModelSubscriptionProductFilterInput | null,
 };
 
 export type OnCreateProductSubscription = {
@@ -4447,6 +4642,10 @@ export type OnCreateProductSubscription = {
   } | null,
 };
 
+export type OnUpdateProductSubscriptionVariables = {
+  filter?: ModelSubscriptionProductFilterInput | null,
+};
+
 export type OnUpdateProductSubscription = {
   onUpdateProduct?:  {
     __typename: "Product",
@@ -4501,6 +4700,10 @@ export type OnUpdateProductSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
+};
+
+export type OnDeleteProductSubscriptionVariables = {
+  filter?: ModelSubscriptionProductFilterInput | null,
 };
 
 export type OnDeleteProductSubscription = {
@@ -4559,6 +4762,10 @@ export type OnDeleteProductSubscription = {
   } | null,
 };
 
+export type OnCreateWareHouseSubscriptionVariables = {
+  filter?: ModelSubscriptionWareHouseFilterInput | null,
+};
+
 export type OnCreateWareHouseSubscription = {
   onCreateWareHouse?:  {
     __typename: "WareHouse",
@@ -4605,6 +4812,10 @@ export type OnCreateWareHouseSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
+};
+
+export type OnUpdateWareHouseSubscriptionVariables = {
+  filter?: ModelSubscriptionWareHouseFilterInput | null,
 };
 
 export type OnUpdateWareHouseSubscription = {
@@ -4655,6 +4866,10 @@ export type OnUpdateWareHouseSubscription = {
   } | null,
 };
 
+export type OnDeleteWareHouseSubscriptionVariables = {
+  filter?: ModelSubscriptionWareHouseFilterInput | null,
+};
+
 export type OnDeleteWareHouseSubscription = {
   onDeleteWareHouse?:  {
     __typename: "WareHouse",
@@ -4701,6 +4916,10 @@ export type OnDeleteWareHouseSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
+};
+
+export type OnCreateLocationSubscriptionVariables = {
+  filter?: ModelSubscriptionLocationFilterInput | null,
 };
 
 export type OnCreateLocationSubscription = {
@@ -4756,6 +4975,10 @@ export type OnCreateLocationSubscription = {
   } | null,
 };
 
+export type OnUpdateLocationSubscriptionVariables = {
+  filter?: ModelSubscriptionLocationFilterInput | null,
+};
+
 export type OnUpdateLocationSubscription = {
   onUpdateLocation?:  {
     __typename: "Location",
@@ -4809,6 +5032,10 @@ export type OnUpdateLocationSubscription = {
   } | null,
 };
 
+export type OnDeleteLocationSubscriptionVariables = {
+  filter?: ModelSubscriptionLocationFilterInput | null,
+};
+
 export type OnDeleteLocationSubscription = {
   onDeleteLocation?:  {
     __typename: "Location",
@@ -4860,6 +5087,10 @@ export type OnDeleteLocationSubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
+};
+
+export type OnCreateInventorySubscriptionVariables = {
+  filter?: ModelSubscriptionInventoryFilterInput | null,
 };
 
 export type OnCreateInventorySubscription = {
@@ -4950,6 +5181,10 @@ export type OnCreateInventorySubscription = {
   } | null,
 };
 
+export type OnUpdateInventorySubscriptionVariables = {
+  filter?: ModelSubscriptionInventoryFilterInput | null,
+};
+
 export type OnUpdateInventorySubscription = {
   onUpdateInventory?:  {
     __typename: "Inventory",
@@ -5036,6 +5271,10 @@ export type OnUpdateInventorySubscription = {
     _deleted?: boolean | null,
     _lastChangedAt: number,
   } | null,
+};
+
+export type OnDeleteInventorySubscriptionVariables = {
+  filter?: ModelSubscriptionInventoryFilterInput | null,
 };
 
 export type OnDeleteInventorySubscription = {

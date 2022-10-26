@@ -3,8 +3,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateOrder = /* GraphQL */ `
-  subscription OnCreateOrder {
-    onCreateOrder {
+  subscription OnCreateOrder($filter: ModelSubscriptionOrderFilterInput) {
+    onCreateOrder(filter: $filter) {
       id
       receiptID
       receipt {
@@ -132,8 +132,8 @@ export const onCreateOrder = /* GraphQL */ `
   }
 `;
 export const onUpdateOrder = /* GraphQL */ `
-  subscription OnUpdateOrder {
-    onUpdateOrder {
+  subscription OnUpdateOrder($filter: ModelSubscriptionOrderFilterInput) {
+    onUpdateOrder(filter: $filter) {
       id
       receiptID
       receipt {
@@ -261,8 +261,8 @@ export const onUpdateOrder = /* GraphQL */ `
   }
 `;
 export const onDeleteOrder = /* GraphQL */ `
-  subscription OnDeleteOrder {
-    onDeleteOrder {
+  subscription OnDeleteOrder($filter: ModelSubscriptionOrderFilterInput) {
+    onDeleteOrder(filter: $filter) {
       id
       receiptID
       receipt {
@@ -390,8 +390,8 @@ export const onDeleteOrder = /* GraphQL */ `
   }
 `;
 export const onCreateReceipt = /* GraphQL */ `
-  subscription OnCreateReceipt {
-    onCreateReceipt {
+  subscription OnCreateReceipt($filter: ModelSubscriptionReceiptFilterInput) {
+    onCreateReceipt(filter: $filter) {
       id
       status
       date
@@ -457,8 +457,8 @@ export const onCreateReceipt = /* GraphQL */ `
   }
 `;
 export const onUpdateReceipt = /* GraphQL */ `
-  subscription OnUpdateReceipt {
-    onUpdateReceipt {
+  subscription OnUpdateReceipt($filter: ModelSubscriptionReceiptFilterInput) {
+    onUpdateReceipt(filter: $filter) {
       id
       status
       date
@@ -524,8 +524,8 @@ export const onUpdateReceipt = /* GraphQL */ `
   }
 `;
 export const onDeleteReceipt = /* GraphQL */ `
-  subscription OnDeleteReceipt {
-    onDeleteReceipt {
+  subscription OnDeleteReceipt($filter: ModelSubscriptionReceiptFilterInput) {
+    onDeleteReceipt(filter: $filter) {
       id
       status
       date
@@ -591,8 +591,8 @@ export const onDeleteReceipt = /* GraphQL */ `
   }
 `;
 export const onCreateEmployee = /* GraphQL */ `
-  subscription OnCreateEmployee {
-    onCreateEmployee {
+  subscription OnCreateEmployee($filter: ModelSubscriptionEmployeeFilterInput) {
+    onCreateEmployee(filter: $filter) {
       id
       name
       startDate
@@ -608,8 +608,8 @@ export const onCreateEmployee = /* GraphQL */ `
   }
 `;
 export const onUpdateEmployee = /* GraphQL */ `
-  subscription OnUpdateEmployee {
-    onUpdateEmployee {
+  subscription OnUpdateEmployee($filter: ModelSubscriptionEmployeeFilterInput) {
+    onUpdateEmployee(filter: $filter) {
       id
       name
       startDate
@@ -625,8 +625,8 @@ export const onUpdateEmployee = /* GraphQL */ `
   }
 `;
 export const onDeleteEmployee = /* GraphQL */ `
-  subscription OnDeleteEmployee {
-    onDeleteEmployee {
+  subscription OnDeleteEmployee($filter: ModelSubscriptionEmployeeFilterInput) {
+    onDeleteEmployee(filter: $filter) {
       id
       name
       startDate
@@ -642,8 +642,8 @@ export const onDeleteEmployee = /* GraphQL */ `
   }
 `;
 export const onCreateCustomer = /* GraphQL */ `
-  subscription OnCreateCustomer {
-    onCreateCustomer {
+  subscription OnCreateCustomer($filter: ModelSubscriptionCustomerFilterInput) {
+    onCreateCustomer(filter: $filter) {
       id
       name
       phoneNumber
@@ -677,8 +677,8 @@ export const onCreateCustomer = /* GraphQL */ `
   }
 `;
 export const onUpdateCustomer = /* GraphQL */ `
-  subscription OnUpdateCustomer {
-    onUpdateCustomer {
+  subscription OnUpdateCustomer($filter: ModelSubscriptionCustomerFilterInput) {
+    onUpdateCustomer(filter: $filter) {
       id
       name
       phoneNumber
@@ -712,8 +712,8 @@ export const onUpdateCustomer = /* GraphQL */ `
   }
 `;
 export const onDeleteCustomer = /* GraphQL */ `
-  subscription OnDeleteCustomer {
-    onDeleteCustomer {
+  subscription OnDeleteCustomer($filter: ModelSubscriptionCustomerFilterInput) {
+    onDeleteCustomer(filter: $filter) {
       id
       name
       phoneNumber
@@ -747,8 +747,8 @@ export const onDeleteCustomer = /* GraphQL */ `
   }
 `;
 export const onCreateProduct = /* GraphQL */ `
-  subscription OnCreateProduct {
-    onCreateProduct {
+  subscription OnCreateProduct($filter: ModelSubscriptionProductFilterInput) {
+    onCreateProduct(filter: $filter) {
       id
       code
       description
@@ -799,8 +799,8 @@ export const onCreateProduct = /* GraphQL */ `
   }
 `;
 export const onUpdateProduct = /* GraphQL */ `
-  subscription OnUpdateProduct {
-    onUpdateProduct {
+  subscription OnUpdateProduct($filter: ModelSubscriptionProductFilterInput) {
+    onUpdateProduct(filter: $filter) {
       id
       code
       description
@@ -851,8 +851,8 @@ export const onUpdateProduct = /* GraphQL */ `
   }
 `;
 export const onDeleteProduct = /* GraphQL */ `
-  subscription OnDeleteProduct {
-    onDeleteProduct {
+  subscription OnDeleteProduct($filter: ModelSubscriptionProductFilterInput) {
+    onDeleteProduct(filter: $filter) {
       id
       code
       description
@@ -903,8 +903,10 @@ export const onDeleteProduct = /* GraphQL */ `
   }
 `;
 export const onCreateWareHouse = /* GraphQL */ `
-  subscription OnCreateWareHouse {
-    onCreateWareHouse {
+  subscription OnCreateWareHouse(
+    $filter: ModelSubscriptionWareHouseFilterInput
+  ) {
+    onCreateWareHouse(filter: $filter) {
       id
       name
       address
@@ -947,8 +949,10 @@ export const onCreateWareHouse = /* GraphQL */ `
   }
 `;
 export const onUpdateWareHouse = /* GraphQL */ `
-  subscription OnUpdateWareHouse {
-    onUpdateWareHouse {
+  subscription OnUpdateWareHouse(
+    $filter: ModelSubscriptionWareHouseFilterInput
+  ) {
+    onUpdateWareHouse(filter: $filter) {
       id
       name
       address
@@ -991,8 +995,10 @@ export const onUpdateWareHouse = /* GraphQL */ `
   }
 `;
 export const onDeleteWareHouse = /* GraphQL */ `
-  subscription OnDeleteWareHouse {
-    onDeleteWareHouse {
+  subscription OnDeleteWareHouse(
+    $filter: ModelSubscriptionWareHouseFilterInput
+  ) {
+    onDeleteWareHouse(filter: $filter) {
       id
       name
       address
@@ -1035,8 +1041,8 @@ export const onDeleteWareHouse = /* GraphQL */ `
   }
 `;
 export const onCreateLocation = /* GraphQL */ `
-  subscription OnCreateLocation {
-    onCreateLocation {
+  subscription OnCreateLocation($filter: ModelSubscriptionLocationFilterInput) {
+    onCreateLocation(filter: $filter) {
       id
       name
       wareHouseID
@@ -1083,8 +1089,8 @@ export const onCreateLocation = /* GraphQL */ `
   }
 `;
 export const onUpdateLocation = /* GraphQL */ `
-  subscription OnUpdateLocation {
-    onUpdateLocation {
+  subscription OnUpdateLocation($filter: ModelSubscriptionLocationFilterInput) {
+    onUpdateLocation(filter: $filter) {
       id
       name
       wareHouseID
@@ -1131,8 +1137,8 @@ export const onUpdateLocation = /* GraphQL */ `
   }
 `;
 export const onDeleteLocation = /* GraphQL */ `
-  subscription OnDeleteLocation {
-    onDeleteLocation {
+  subscription OnDeleteLocation($filter: ModelSubscriptionLocationFilterInput) {
+    onDeleteLocation(filter: $filter) {
       id
       name
       wareHouseID
@@ -1179,8 +1185,10 @@ export const onDeleteLocation = /* GraphQL */ `
   }
 `;
 export const onCreateInventory = /* GraphQL */ `
-  subscription OnCreateInventory {
-    onCreateInventory {
+  subscription OnCreateInventory(
+    $filter: ModelSubscriptionInventoryFilterInput
+  ) {
+    onCreateInventory(filter: $filter) {
       id
       productID
       wareHouseID
@@ -1258,8 +1266,10 @@ export const onCreateInventory = /* GraphQL */ `
   }
 `;
 export const onUpdateInventory = /* GraphQL */ `
-  subscription OnUpdateInventory {
-    onUpdateInventory {
+  subscription OnUpdateInventory(
+    $filter: ModelSubscriptionInventoryFilterInput
+  ) {
+    onUpdateInventory(filter: $filter) {
       id
       productID
       wareHouseID
@@ -1337,8 +1347,10 @@ export const onUpdateInventory = /* GraphQL */ `
   }
 `;
 export const onDeleteInventory = /* GraphQL */ `
-  subscription OnDeleteInventory {
-    onDeleteInventory {
+  subscription OnDeleteInventory(
+    $filter: ModelSubscriptionInventoryFilterInput
+  ) {
+    onDeleteInventory(filter: $filter) {
       id
       productID
       wareHouseID
