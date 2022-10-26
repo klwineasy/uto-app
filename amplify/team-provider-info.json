@@ -10,6 +10,11 @@
       "StackName": "amplify-utoapp-dev-10450",
       "StackId": "arn:aws:cloudformation:us-west-1:929819397671:stack/amplify-utoapp-dev-10450/eae1f410-2f4c-11ed-b50a-02b61f974fd5",
       "AmplifyAppId": "d3lhwqaqyxpeeb"
+    },
+    "categories": {
+      "auth": {
+        "utoappe433a500": {}
+      }
     }
   }
 }

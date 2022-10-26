@@ -9,10 +9,9 @@ import {
   Avatar,
   Menu,
   MenuItem,
-  Container,
 } from '@mui/material';
 import AppsIcon from '@mui/icons-material/Apps';
-import { Flex } from '@aws-amplify/ui-react';
+//@ts-ignore
 import { useAmplify } from '../context';
 import { useRouter } from 'next/router';
 
@@ -21,12 +20,12 @@ type Props = {};
 export const Navbar = (props: Props) => {
   const { logout } = useAmplify();
   const router = useRouter();
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
+
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+
+  const [toggleState, setToggleState] = React.useState(false);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -40,6 +39,11 @@ export const Navbar = (props: Props) => {
   const handleLogout = async () => {
     await logout();
     router.push('/login');
+  };
+
+  const handleNavigation = (event: React.MouseEvent<HTMLElement>) => {
+    //@ts-ignore
+    router.push('/' + event.target.innerText.toLowerCase());
   };
 
   return (
@@ -62,6 +66,29 @@ export const Navbar = (props: Props) => {
         </Typography>
         <AppsIcon />
       </Toolbar>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <MenuItem onClick={handleNavigation}>
+          <Typography sx={{ fontWeight: 'bold' }}>Products</Typography>
+        </MenuItem>
+        <MenuItem>
+          <Typography sx={{ fontWeight: 'bold' }}>Sales</Typography>
+        </MenuItem>
+        <MenuItem>
+          <Typography sx={{ fontWeight: 'bold' }}>Credits</Typography>
+        </MenuItem>
+        <MenuItem>
+          <Typography sx={{ fontWeight: 'bold' }}>Transfers</Typography>
+        </MenuItem>
+        <MenuItem>
+          <Typography sx={{ fontWeight: 'bold' }}>Cashbook</Typography>
+        </MenuItem>
+      </Box>
       <Box sx={{ margin: '0 2rem' }}>
         <Tooltip title='Open settings'>
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

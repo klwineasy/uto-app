@@ -1,0 +1,92 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+} # FOR TESTING ONLY!
+type Order @model {
+  id: ID!
+  receiptID: ID! @index(name: "orderByReceipt")
+  receipt: Receipt @belongsTo(fields: ["receiptID"])
+  productID: ID! @index(name: "orderByProduct")
+  product: Product @belongsTo(fields: ["productID"])
+  quantity: Int!
+  inventoryID: ID!
+  inventory: Inventory @hasOne(fields: ["inventoryID"])
+  pricePerUnit: Float!
+  totalPrice: Float!
+  date: AWSDate!
+}
+
+type Receipt @model {
+  id: ID!
+  status: String!
+  date: AWSDate!
+  customerID: ID! @index(name: "receiptByCustomer")
+  orders: [Order] @hasMany(indexName: "orderByReceipt", fields: ["id"])
+  customer: Customer @belongsTo(fields: ["customerID"])
+  subTotal: Float!
+  discount: Float!
+  total: Float!
+  credit: Boolean!
+  creditDue: Int!
+  salesRepID: ID!
+  salesRep: Employee! @hasOne(fields: ["salesRepID"])
+}
+
+type Employee @model {
+  id: ID!
+  name: String!
+  startDate: AWSDate!
+  phoneNumber: String!
+  email: String!
+  jobTitle: String!
+}
+
+type Customer @model {
+  id: ID!
+  name: String!
+  phoneNumber: String!
+  receipts: [Receipt] @hasMany(indexName: "receiptByCustomer", fields: ["id"])
+}
+
+type Product @model {
+  id: ID!
+  code: String!
+  description: String!
+  inventories: [Inventory]
+    @hasMany(indexName: "inventoryByProduct", fields: ["id"])
+  unit: String!
+  packing: String!
+  salePrice: Float!
+  orders: [Order] @hasMany(indexName: "orderByProduct", fields: ["id"])
+}
+
+type WareHouse @model {
+  id: ID!
+  name: String!
+  address: String!
+  locations: [Location]
+    @hasMany(indexName: "warehouseByLocation", fields: ["id"])
+  inventories: [Inventory]
+    @hasMany(indexName: "inventoryByWareHouse", fields: ["id"])
+}
+
+type Location @model {
+  id: ID!
+  name: String!
+  wareHouseID: ID! @index(name: "warehouseByLocation")
+  wareHouse: WareHouse @belongsTo(fields: ["wareHouseID"])
+  inventories: [Inventory]
+    @hasMany(indexName: "inventoryByLocation", fields: ["id"])
+}
+
+type Inventory @model {
+  id: ID!
+  productID: ID! @index(name: "inventoryByProduct")
+  wareHouseID: ID! @index(name: "inventoryByWareHouse")
+  locationID: ID! @index(name: "inventoryByLocation")
+  product: Product @belongsTo(fields: ["productID"])
+  warehouse: WareHouse @belongsTo(fields: ["wareHouseID"])
+  location: Location @belongsTo(fields: ["locationID"])
+  quantity: Int!
+}

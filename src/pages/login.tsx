@@ -25,7 +25,6 @@ const formFields = {
 const Login: NextPage = () => {
   return (
     <ThemeProvider>
-      <Navbar />
       <Container maxWidth='xs'>
         <Box
           sx={{
