@@ -9,6 +9,11 @@ import {
   Avatar,
   Menu,
   MenuItem,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
 } from '@mui/material';
 import AppsIcon from '@mui/icons-material/Apps';
 //@ts-ignore
@@ -16,6 +21,7 @@ import { useAmplify } from '../context';
 import { useRouter } from 'next/router';
 
 type Props = {};
+type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 export const Navbar = (props: Props) => {
   const { logout } = useAmplify();
@@ -24,8 +30,6 @@ export const Navbar = (props: Props) => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
-
-  const [toggleState, setToggleState] = React.useState(false);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -45,6 +49,10 @@ export const Navbar = (props: Props) => {
     //@ts-ignore
     router.push('/' + event.target.innerText.toLowerCase());
   };
+
+  const [state, setState] = React.useState({
+    left: false,
+  });
 
   return (
     <AppBar
@@ -73,21 +81,31 @@ export const Navbar = (props: Props) => {
           justifyContent: 'space-between',
           alignItems: 'center',
         }}>
-        <MenuItem onClick={handleNavigation}>
-          <Typography sx={{ fontWeight: 'bold' }}>Products</Typography>
-        </MenuItem>
-        <MenuItem>
-          <Typography sx={{ fontWeight: 'bold' }}>Sales</Typography>
-        </MenuItem>
-        <MenuItem>
-          <Typography sx={{ fontWeight: 'bold' }}>Credits</Typography>
-        </MenuItem>
-        <MenuItem>
-          <Typography sx={{ fontWeight: 'bold' }}>Transfers</Typography>
-        </MenuItem>
-        <MenuItem>
-          <Typography sx={{ fontWeight: 'bold' }}>Cashbook</Typography>
-        </MenuItem>
+        <React.Fragment>
+          <MenuItem onClick={handleNavigation}>
+            <Typography sx={{ fontWeight: 'bold' }}>Products</Typography>
+          </MenuItem>
+        </React.Fragment>
+        <React.Fragment>
+          <MenuItem>
+            <Typography sx={{ fontWeight: 'bold' }}>Sales</Typography>
+          </MenuItem>
+        </React.Fragment>
+        <React.Fragment>
+          <MenuItem>
+            <Typography sx={{ fontWeight: 'bold' }}>Credits</Typography>
+          </MenuItem>
+        </React.Fragment>
+        <React.Fragment>
+          <MenuItem onClick={handleNavigation}>
+            <Typography sx={{ fontWeight: 'bold' }}>Transfers</Typography>
+          </MenuItem>
+        </React.Fragment>
+        <React.Fragment>
+          <MenuItem>
+            <Typography sx={{ fontWeight: 'bold' }}>Cashbook</Typography>
+          </MenuItem>
+        </React.Fragment>
       </Box>
       <Box sx={{ margin: '0 2rem' }}>
         <Tooltip title='Open settings'>
