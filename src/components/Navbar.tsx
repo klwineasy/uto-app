@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, MouseEvent, Fragment } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -9,33 +9,27 @@ import {
   Avatar,
   Menu,
   MenuItem,
-  Drawer,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
 } from '@mui/material';
 import AppsIcon from '@mui/icons-material/Apps';
 //@ts-ignore
 import { useAmplify } from '../context';
 import { useRouter } from 'next/router';
+import { SideMenu } from './sidemenu';
 
 type Props = {};
-type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 export const Navbar = (props: Props) => {
   const { logout } = useAmplify();
   const router = useRouter();
 
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [toggleSideMenu, setToggleSideMenu] = useState<boolean>(false);
 
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleCloseUserMenu = (event: MouseEvent<HTMLElement>) => {
     console.log(event);
     setAnchorElUser(null);
   };
@@ -45,14 +39,10 @@ export const Navbar = (props: Props) => {
     router.push('/login');
   };
 
-  const handleNavigation = (event: React.MouseEvent<HTMLElement>) => {
+  const handleNavigation = (event: MouseEvent<HTMLElement>) => {
     //@ts-ignore
     router.push('/' + event.target.innerText.toLowerCase());
   };
-
-  const [state, setState] = React.useState({
-    left: false,
-  });
 
   return (
     <AppBar
@@ -63,7 +53,12 @@ export const Navbar = (props: Props) => {
         justifyContent: 'space-between',
         alignItems: 'center',
       }}>
-      <Toolbar sx={{ justifyContent: 'center' }}>
+      <Toolbar
+        sx={{ justifyContent: 'center' }}
+        onClick={() => {
+          setToggleSideMenu(!toggleSideMenu);
+          console.log(toggleSideMenu);
+        }}>
         <Typography
           variant='h5'
           component='h1'
@@ -73,6 +68,7 @@ export const Navbar = (props: Props) => {
           UTO
         </Typography>
         <AppsIcon />
+        <SideMenu toggleSideMenu={toggleSideMenu} />
       </Toolbar>
       <Box
         sx={{
@@ -81,31 +77,31 @@ export const Navbar = (props: Props) => {
           justifyContent: 'space-between',
           alignItems: 'center',
         }}>
-        <React.Fragment>
+        <Fragment>
           <MenuItem onClick={handleNavigation}>
             <Typography sx={{ fontWeight: 'bold' }}>Products</Typography>
           </MenuItem>
-        </React.Fragment>
-        <React.Fragment>
+        </Fragment>
+        <Fragment>
           <MenuItem>
             <Typography sx={{ fontWeight: 'bold' }}>Sales</Typography>
           </MenuItem>
-        </React.Fragment>
-        <React.Fragment>
+        </Fragment>
+        <Fragment>
           <MenuItem>
             <Typography sx={{ fontWeight: 'bold' }}>Credits</Typography>
           </MenuItem>
-        </React.Fragment>
-        <React.Fragment>
+        </Fragment>
+        <Fragment>
           <MenuItem onClick={handleNavigation}>
             <Typography sx={{ fontWeight: 'bold' }}>Transfers</Typography>
           </MenuItem>
-        </React.Fragment>
-        <React.Fragment>
+        </Fragment>
+        <Fragment>
           <MenuItem>
             <Typography sx={{ fontWeight: 'bold' }}>Cashbook</Typography>
           </MenuItem>
-        </React.Fragment>
+        </Fragment>
       </Box>
       <Box sx={{ margin: '0 2rem' }}>
         <Tooltip title='Open settings'>
